@@ -11,7 +11,7 @@ export async function up(knex) {
 		table.index(['expired'], 'sessions_expired_index');
 	});
 
-	await knex.schema.createTable('users', (table) => {
+	await knex.schema.createTableIfNotExists('users', (table) => {
 		table.increments('id').primary();
 		table.string('username').unique().notNullable();
 		table.string('email').unique().notNullable();
