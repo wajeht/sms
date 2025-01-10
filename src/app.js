@@ -5,6 +5,7 @@ import express from 'express';
 import flash from 'connect-flash';
 import { router } from './router.js';
 import compression from 'compression';
+import { appConfig } from './config.js';
 import expressLayouts from 'express-ejs-layouts';
 import { errorMiddleware, notFoundMiddleware, appLocalStateMiddleware, sessionMiddleware } from './middleware.js';
 
@@ -32,7 +33,7 @@ app.engine('html', ejs.renderFile);
 
 app.set('view engine', 'html');
 
-app.set('view cache', true);
+app.set('view cache', appConfig.env === 'production');
 
 app.set('views', './src/views/pages');
 
