@@ -3,6 +3,7 @@
     "addgroup",
     "adduser",
     "caprover",
+    "CHOKIDAR",
     "deeznutz",
     "Healthz",
     "knexfile",
@@ -11,6 +12,7 @@
     "rmds",
     "sess",
     "Synchronised",
+    "USEPOLLING",
     "wajeht"
   ]
 }
