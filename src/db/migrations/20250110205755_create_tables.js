@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 export async function up(knex) {
-	await knex.schema.createTable('sessions', (table) => {
+	await knex.schema.createTableIfNotExists('sessions', (table) => {
 		table.string('sid', 255).primary().notNullable();
 		table.json('sess').notNullable();
 		table.timestamp('expired').notNullable();
