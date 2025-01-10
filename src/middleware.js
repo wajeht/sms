@@ -32,7 +32,7 @@ export const csrfMiddleware = (() => {
 	];
 })();
 
-export const sessionMiddleware = session({
+export const sessionMiddleware = () => session({
 	secret: sessionConfig.secret,
 	resave: false,
 	saveUninitialized: false,
