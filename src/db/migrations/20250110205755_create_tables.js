@@ -7,6 +7,7 @@ export async function up(knex) {
 		table.string('sid', 255).primary().notNullable();
 		table.json('sess').notNullable();
 		table.timestamp('expired').notNullable();
+
 		table.index(['expired'], 'sessions_expired_index');
 	});
 
@@ -19,6 +20,7 @@ export async function up(knex) {
 		table.integer('api_key_version').defaultTo(0).notNullable();
 		table.timestamp('api_key_created_at').nullable();
 		table.timestamps(true, true);
+
 		table.index('api_key');
 		table.index(['email', 'is_admin', 'username']);
 	});
