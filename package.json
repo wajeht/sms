@@ -4,7 +4,7 @@
   "type": "module",
   "main": "./src/server.js",
   "scripts": {
-    "start": "NODE_ENV=production node src/server.js",
+    "start": "NODE_ENV=production npm run db:prepare:prod && node --no-warnings ./src/server.js",
     "dev": "node --watch ./src/server.js",
     "db:prepare:prod": "npm run db:migrate:latest",
     "db:rollback": "knex migrate:rollback --knexfile=./src/db/knexfile.js",
