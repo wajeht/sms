@@ -1,34 +1,43 @@
 import knex from 'knex';
-import { Worker } from 'worker_threads';
+import { appConfig } from '../config.js';
 import knexConfig from './knexfile.js';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const db = knex(knexConfig);
 
-export function runMigrationsInWorker(force = true) {
-  console.log('Starting database migrations in worker thread...');
+export async function runMigrations(force = false) {
+	try {
+		if (appConfig.env !== 'production' && force !== true) {
+			console.info('cannot run auto database migration on non production');
+			return;
+		}
 
-  const worker = new Worker(path.join(__dirname, 'migrationWorker.js'));
+		const config = {
+			directory: path.resolve(path.join(process.cwd(), 'src', 'db', 'migrations')),
+		};
 
-  worker.on('message', (message) => {
-    console.log('Migration worker:', message);
-  });
+		const version = await db.migrate.currentVersion();
 
-  worker.on('error', (error) => {
-    console.error('Migration worker error:', error.message);
-  });
+		console.info(`current database version ${version}`);
 
-  worker.on('exit', (code) => {
-    if (code !== 0) {
-      console.error(`Migration worker stopped with exit code ${code}`);
-    } else {
-      console.log('Migration worker completed successfully');
-    }
-  });
+		console.info(`checking for database upgrades`);
 
-  worker.postMessage({ force });
+		const [batchNo, migrations] = await db.migrate.latest(config);
+
+		if (migrations.length === 0) {
+			console.info('database upgrade not required');
+			return;
+		}
+
+		const migrationList = migrations
+			.map((migration ) => migration.split('_')[1].split('.')[0])
+			.join(', ');
+
+		console.info(`database upgrades completed for ${migrationList} schema`);
+
+		console.info(`batch ${batchNo} run: ${migrations.length} migrations`);
+	} catch (error) {
+		console.error('error running migrations', error);
+		throw error;
+	}
 }

@@ -4,7 +4,6 @@ import { csrfSync } from 'csrf-sync';
 import { sessionConfig, appConfig } from './config.js'
 import { ConnectSessionKnexStore } from 'connect-session-knex';
 
-
 export function notFoundMiddleware(req, res, next) {
 	return res.render('error.html', {
 		statusCode: 404,
@@ -34,24 +33,24 @@ export const csrfMiddleware = (() => {
 })();
 
 export const sessionMiddleware = session({
-		secret: sessionConfig.secret,
-		resave: false,
-		saveUninitialized: false,
-		store: new ConnectSessionKnexStore({
-			knex: db,
-			tableName: 'sessions',
-			createTable: false,
-		}),
-		proxy: appConfig.env === 'production',
-		cookie: {
-			path: '/',
-			domain: `.${sessionConfig.domain}`,
-			maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
-			httpOnly: appConfig.env === 'production',
-			sameSite: 'lax',
-			secure: appConfig.env === 'production',
-		},
-	});
+	secret: sessionConfig.secret,
+	resave: false,
+	saveUninitialized: false,
+	store: new ConnectSessionKnexStore({
+		knex: db,
+		tableName: 'sessions',
+		createTable: false,
+	}),
+	proxy: appConfig.env === 'production',
+	cookie: {
+		path: '/',
+		domain: `.${sessionConfig.domain}`,
+		maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+		httpOnly: appConfig.env === 'production',
+		sameSite: 'lax',
+		secure: appConfig.env === 'production',
+	},
+});
 
 export async function appLocalStateMiddleware(req, res, next) {
 	try {
