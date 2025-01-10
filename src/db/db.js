@@ -22,7 +22,7 @@ export async function runMigrations(force = false) {
 
 		console.info(`checking for database upgrades`);
 
-		const [batchNo, migrations] = await db.migrate.latest(config);
+		const [batchNo, migrations] = await db.migrate.forceFreeMigrationsLock(config);
 
 		if (migrations.length === 0) {
 			console.info('database upgrade not required');
