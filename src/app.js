@@ -2,12 +2,19 @@ import ejs from 'ejs';
 import cors from 'cors';
 import helmet from 'helmet';
 import express from 'express';
+import flash from 'connect-flash';
 import { router } from './router.js';
 import compression from 'compression';
 import expressLayouts from 'express-ejs-layouts';
-import { errorMiddleware, notFoundMiddleware } from './middleware.js';
+import { errorMiddleware, notFoundMiddleware, appLocalStateMiddleware, sessionMiddleware } from './middleware.js';
 
 const app = express();
+
+app.set('trust proxy', 1);
+
+app.use(sessionMiddleware);
+
+app.use(flash());
 
 app.use(cors());
 
@@ -30,6 +37,8 @@ app.set('view cache', true);
 app.set('views', './src/views/pages');
 
 app.set('layout', '../layouts/public.html');
+
+app.use(appLocalStateMiddleware);
 
 app.use(expressLayouts);
 

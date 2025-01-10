@@ -7,3 +7,8 @@ export const appConfig = {
   env: process.env.NODE_ENV,
   port: parseInt(process.env.PORT || 80),
 }
+
+export const sessionConfig = {
+	secret: process.env.SESSION_SECRET || 'sms',
+	domain: process.env.SESSION_DOMAIN || 'localhost',
+};
