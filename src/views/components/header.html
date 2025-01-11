@@ -1,17 +1,32 @@
-<header class="p-10 sticky top-0 z-10 backdrop-blur-sm bg-gradient-to-r from-[#080e1b] to-[#1a3f4a] text-[#cccccc]">
-	<!-- wrapper -->
-	<div class="mx-auto max-w-5xl flex justify-between w-full">
-		<!-- left -->
-		<div class="flex-1">
-			<a title="SMS" class="text-2xl font-black hover:text-white transition-colors duration-300 ease-out" href="/" >SMS</a>
-		</div>
+<header class="p-10 sticky top-0 z-10 backdrop-blur-sm bg-gradient-to-r from-[#080e1b] to-[#1a3f4a] text-[#cccccc]" role="banner">
+  <div class="mx-auto max-w-5xl flex justify-between w-full">
+    <!-- Logo/Brand Section -->
+    <div class="flex-1">
+      <a href="/"
+         class="text-2xl font-black hover:text-white transition-colors duration-300 ease-out"
+         aria-label="SMS - Return to homepage">
+        <span>SMS</span>
+      </a>
+    </div>
 
-		<!-- right -->
-		<nav class="flex-none">
-			<ul class="flex gap-5">
-				<li><a href="/privacy-policy" class="hover:text-white transition-colors duration-300 ease-out" title="privacy-policy" >Privacy</a></li>
-				<li><a href="/terms-of-service" class="hover:text-white transition-colors duration-300 ease-out" title="terms-of-service">Terms</a></li>
-			</ul>
-		</nav>
-	</div>
+    <!-- Main Navigation -->
+    <nav aria-label="Legal pages navigation" class="flex-none">
+      <ul class="flex gap-5" role="list">
+        <li>
+          <a href="/privacy-policy"
+             class="hover:text-white transition-colors duration-300 ease-out"
+             aria-label="Privacy Policy">
+            Privacy Policy
+          </a>
+        </li>
+        <li>
+          <a href="/terms-of-service"
+             class="hover:text-white transition-colors duration-300 ease-out"
+             aria-label="Terms of Service">
+            Terms of Service
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>
