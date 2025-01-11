@@ -11,7 +11,7 @@ export function notFoundMiddleware() {
 	return res.render('error.html', {
 		title: 'Not found',
 		statusCode: 404,
-		message: 'not found'
+		message: 'Sorry, the page you are looking for could not be found.'
 	})
 }
 }
@@ -20,8 +20,8 @@ export function errorMiddleware() {
  return (err: Error, req: Request, res: Response, next: Next) =>{
 	return res.render('error.html', {
 		title: 'Error',
-		statusCode: 505,
-		message: 'internal server error'
+		statusCode: 500,
+		message: 'The server encountered an internal error or misconfiguration and was unable to complete your request'
 	})
 }
 }
