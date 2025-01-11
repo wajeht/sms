@@ -20,3 +20,13 @@ export function getPrivacyPolicyPageHandler(req: Request, res: Response) {
 export function getTermsOfServicePageHandler(req: Request, res: Response) {
   return res.render('terms-of-service.html',  { title: 'Terms of Service'});
 }
+
+// GET /contact
+export function getContactPageHandler(req: Request, res: Response) {
+  return res.render('contact.html', { title: 'Contact'});
+}
+
+// GET /api-docs
+export function getAPIDocsPageHandler(req: Request, res: Response) {
+  return res.render('api-docs.html', { title: 'API Doc'});
+}
