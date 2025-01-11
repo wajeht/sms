@@ -6,22 +6,18 @@ export async function up(knex: Knex): Promise<void> {
 		table.json('sess').notNullable();
 		table.timestamp('expired').notNullable();
 
-		table.index(['expired'], 'sessions_expired_index');
+		table.index(['sid']);
 	});
 
 	await knex.schema.createTable('users', (table) => {
-			table.increments('id').primary();
-			table.string('username').unique().notNullable();
-			table.string('email').unique().notNullable();
-			table.boolean('is_admin').defaultTo(false);
-			table.string('api_key').unique().nullable();
-			table.integer('api_key_version').defaultTo(0).notNullable();
-			table.timestamp('api_key_created_at').nullable();
-			table.timestamps(true, true);
+		table.increments('id').primary();
+		table.string('username').unique().notNullable();
+		table.string('email').unique().notNullable();
+		table.boolean('is_admin').defaultTo(false);
+		table.timestamps(true, true);
 
-			table.index('api_key');
-			table.index(['email', 'is_admin', 'username']);
-		});
+		table.index(['email', 'is_admin', 'username']);
+	});
 }
 
 export async function down(knex: Knex): Promise<void> {

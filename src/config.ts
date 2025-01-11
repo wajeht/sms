@@ -1,12 +1,14 @@
 import dotenv from 'dotenv';
 import path from 'node:path';
+import { Env } from './types';
 
 dotenv.config({ path: path.resolve(path.join(process.cwd(), '.env')) });
 
 export const appConfig = {
-  env: process.env.NODE_ENV || "development",
-  port: parseInt(process.env.APP_PORT || '80', 10),
-  adminEmail: process.env.APP_ADMIN_EMAIL || '',
+	port: parseInt(process.env.APP_PORT || '80', 10),
+  appUrl: process.env.APP_URL || 'localhost',
+	env: (process.env.NODE_ENV as Env) || 'development',
+	adminEmail: process.env.APP_ADMIN_EMAIL || '',
 }
 
 export const sessionConfig = {

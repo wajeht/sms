@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import { Knex } from 'knex';
 import path from 'node:path';
+import { Knex } from 'knex';
 
 const env = dotenv.config({ path: path.resolve(path.join(process.cwd(), '..', '..', '.env')) });
 

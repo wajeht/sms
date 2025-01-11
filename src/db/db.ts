@@ -45,7 +45,7 @@ export async function runMigrations(force: boolean = false) {
 
 		logger.info(`batch ${batchNo} run: ${migrations.length} migrations`);
 	} catch (error) {
-		logger.error('error running migrations %o', error);
-		throw error;
+			logger.error(`error running migrations %o`, error);
+			throw error;
 	}
 }
