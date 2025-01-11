@@ -17,11 +17,11 @@ app.use(sessionMiddleware());
 
 app.use(flash());
 
-app.use(cors());
-
 app.use(compression());
 
-app.use(helmet());
+app.use(cors());
+
+app.use(helmetMiddleware());
 
 app.use(express.json({ limit: '100kb' }));
 
@@ -39,14 +39,14 @@ app.set('views', './src/views/pages');
 
 app.set('layout', '../layouts/public.html');
 
-app.use(appLocalStateMiddleware);
-
 app.use(expressLayouts);
+
+app.use(appLocalStateMiddleware);
 
 app.use(router);
 
-app.use(notFoundMiddleware);
+app.use(notFoundMiddleware());
 
-app.use(errorMiddleware);
+app.use(errorMiddleware());
 
 export { app };

@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { db } from './db/db.js';
 import { Request, Response, NextFunction as Next} from 'express'
 import session from 'express-session';
@@ -7,18 +5,22 @@ import { csrfSync } from 'csrf-sync';
 import { sessionConfig, appConfig } from './config.js'
 import { ConnectSessionKnexStore } from 'connect-session-knex';
 
-export function notFoundMiddleware(req: Request, res: Response, next: Next) {
+export function notFoundMiddleware() {
+ return(req: Request, res: Response, next: Next) =>{
 	return res.render('error.html', {
 		statusCode: 404,
 		message: 'not found'
 	})
 }
+}
 
-export function errorMiddleware(err: Error, req: Request, res: Response, next: Next) {
+export function errorMiddleware() {
+ return (err: Error, req: Request, res: Response, next: Next) =>{
 	return res.render('error.html', {
 		statusCode: 505,
 		message: 'internal server error'
 	})
+}
 }
 
 export const csrfMiddleware = (() => {
@@ -29,6 +31,7 @@ export const csrfMiddleware = (() => {
 	return [
 		csrfSynchronisedProtection,
 		(req: Request, res: Response, next: Next) => {
+			// @ts-expect-error - trust be bro
 			res.locals.csrfToken = req.csrfToken();
 			next();
 		},
