@@ -707,6 +707,15 @@ video {
   background-color: rgb(25 25 25 / var(--tw-bg-opacity, 1)) !important;
 }
 
+.bg-\[\#3890af\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(56 144 175 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.bg-\[\] {
+  background-color:  !important;
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important;
 }
@@ -717,8 +726,18 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
+.from-\[\#205372\] {
+  --tw-gradient-from: #205372 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(32 83 114 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
 .to-\[\#1a3f4a\] {
   --tw-gradient-to: #1a3f4a var(--tw-gradient-to-position) !important;
+}
+
+.to-\[\#3790ad\] {
+  --tw-gradient-to: #3790ad var(--tw-gradient-to-position) !important;
 }
 
 .p-10 {
@@ -729,6 +748,21 @@ video {
   padding: 0px !important;
 }
 
+.px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+.py-8 {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.py-7 {
+  padding-top: 1.75rem !important;
+  padding-bottom: 1.75rem !important;
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -736,6 +770,11 @@ video {
 .text-2xl {
   font-size: 1.5rem !important;
   line-height: 2rem !important;
+}
+
+.text-3xl {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
 }
 
 .font-black {
@@ -755,6 +794,11 @@ video {
 .text-\[\#d3d3d3\] {
   --tw-text-opacity: 1 !important;
   color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
+}
+
+.text-white {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
 }
 
 .backdrop-blur-sm {
