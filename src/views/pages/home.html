@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div class="mx-auto max-w-5xl w-full p-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
+<div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
   <div class="mx-auto max-w-5xl w-full flex gap-5 justify-evenly">
     <% for (let i=0; i < carriers.keys.length; i++) { %>
@@ -23,17 +23,12 @@
   </div>
 </div>
 
-<div class="mx-auto max-w-5xl w-full p-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
+<div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
-  <div class="mx-auto max-w-5xl w-full flex flex-col gap-5 justify-between">
+  <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
     <% for (let i= 0; i < carriers.keys.length; i++) { %>
       <div>
-        <h3
-          id="<%= carriers.keys[i] %>"
-          class="font-medium text-2xl transition-colors duration-300 ease-out"
-        >
-          <%= carriers.keys[i] %>
-        </h3>
+        <h3 id="<%= carriers.keys[i] %>" class="font-medium text-2xl mb-5"><%= carriers.keys[i] %></h3>
         <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
             <div class="mb-5">
               <p><%= carriers.data[carriers.keys[i]][j].name %></p>
