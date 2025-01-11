@@ -1,4 +1,7 @@
 export const carriers = {
+  3: [
+    { name: '3 River Wireless', emails: ['<10-digit-number>@sms.3rivers.net'] },
+  ],
   A: [
     { name: 'ACS Wireless', emails: ['<10-digit-number>@paging.acswireless.com'] },
     { name: 'Advantage Communications', emails: ['<10-digit-number>@advantagepaging.com'] },
