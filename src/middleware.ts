@@ -1,9 +1,10 @@
+import helmet from 'helmet';
 import { db } from './db/db.js';
-import { Request, Response, NextFunction as Next} from 'express'
-import session from 'express-session';
 import { csrfSync } from 'csrf-sync';
+import session from 'express-session';
 import { sessionConfig, appConfig } from './config.js'
 import { ConnectSessionKnexStore } from 'connect-session-knex';
+import { Request, Response, NextFunction as Next} from 'express'
 
 export function notFoundMiddleware() {
  return(req: Request, res: Response, next: Next) =>{
@@ -38,8 +39,32 @@ export const csrfMiddleware = (() => {
 	];
 })();
 
-export function sessionMiddleware() {
+export function helmetMiddleware() {
+	return helmet({
+		contentSecurityPolicy: {
+			useDefaults: true,
+			directives: {
+				...helmet.contentSecurityPolicy.getDefaultDirectives(),
+				'default-src': ["'self'", 'plausible.jaw.dev', 'sms.jaw.dev', 'jaw.lol'],
+				'script-src': [
+					"'self'",
+					"'unsafe-inline'",
+					"'unsafe-eval'",
+					'plausible.jaw.dev',
+					'jaw.lol',
+					'sms.jaw.dev',
+				],
+				'script-src-attr': ["'unsafe-inline'"],
+				'form-action': ["'self'", '*'],
+			},
+		},
+		referrerPolicy: {
+			policy: 'strict-origin-when-cross-origin',
+		},
+	});
+}
 
+export function sessionMiddleware() {
  return session({
 	secret: sessionConfig.secret,
 	resave: false,
