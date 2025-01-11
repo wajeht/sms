@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-	await  knex.schema.createTable('sessions', (table) => {
+	await knex.schema.createTable('sessions', (table) => {
 		table.string('sid', 255).primary().notNullable();
 		table.json('sess').notNullable();
 		table.timestamp('expired').notNullable();
@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
 		table.index(['expired'], 'sessions_expired_index');
 	});
 
-	await  knex.schema.createTable('users', (table) => {
+	await knex.schema.createTable('users', (table) => {
 			table.increments('id').primary();
 			table.string('username').unique().notNullable();
 			table.string('email').unique().notNullable();

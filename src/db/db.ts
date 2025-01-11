@@ -1,8 +1,11 @@
 import knex from 'knex';
-import { appConfig } from '../config';
-import knexConfig from './knexfile';
 import path from 'node:path';
 import { logger } from '../logger';
+import knexConfig from './knexfile';
+import { appConfig } from '../config';
+import { attachPaginate } from 'knex-paginate';
+
+attachPaginate();
 
 export const db = knex(knexConfig);
 
