@@ -5,5 +5,5 @@ export function getHealthzHandler (req: Request, res: Response) {
 }
 
 export function getHomepageHandler(req: Request, res: Response) {
-  return res.render('home.html');
+  return res.render('home.html', { title: '' });
 }

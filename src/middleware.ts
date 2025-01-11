@@ -9,6 +9,7 @@ import { Request, Response, NextFunction as Next} from 'express'
 export function notFoundMiddleware() {
  return(req: Request, res: Response, next: Next) =>{
 	return res.render('error.html', {
+		title: 'Not found',
 		statusCode: 404,
 		message: 'not found'
 	})
@@ -18,6 +19,7 @@ export function notFoundMiddleware() {
 export function errorMiddleware() {
  return (err: Error, req: Request, res: Response, next: Next) =>{
 	return res.render('error.html', {
+		title: 'Error',
 		statusCode: 505,
 		message: 'internal server error'
 	})
