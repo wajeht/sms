@@ -3,15 +3,15 @@
 
   <%- include('../components/head.html') %>
 
-  <body style="display: flex; flex-direction: column; min-height: 100vh; gap: 30px;">
+	<body id="app" class="flex min-h-screen flex-col overflow-auto max-w-full" v-cloak>
+		<!-- header -->
+		<%- include('../components/header.html') %>
 
-    <main style="flex: 1;  display: flex; justify-content: center;">
-      <div style="max-width: 1280px; width: 100%; padding: 20px;">
-        <%- body %>
-      </div>
-    </main>
+		<!-- main -->
+		<main class="flex-1 relative h-full bg-[#191919] text-[#d3d3d3]"><%- body %></main>
 
-    <%- include('../components/footer.html') %>
-  </body>
+		<!-- footer -->
+		<%- include('../components/footer.html') %>
+	</body>
 
 </html>

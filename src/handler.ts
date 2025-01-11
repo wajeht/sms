@@ -12,10 +12,10 @@ export function getHomepageHandler(req: Request, res: Response) {
 
 // GET /privacy-policy
 export function getPrivacyPolicyPageHandler(req: Request, res: Response) {
-  return res.render('privacy-policy.html');
+  return res.render('privacy-policy.html', { title: 'Privacy Policy'});
 }
 
 // GET /terms-of-service
 export function getTermsOfServicePageHandler(req: Request, res: Response) {
-  return res.render('terms-of-service.html');
+  return res.render('terms-of-service.html',  { title: 'Terms of Service'});
 }

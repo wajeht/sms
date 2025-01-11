@@ -11,7 +11,7 @@
     "build:server": "tsc",
     "build": "npm run build:server",
     "build:tailwind": "npx tailwindcss -i ./public/tailwind.css -o ./public/style.css --minify",
-		"build:tailwind:colors": "node --no-warnings ./src/utils/tailwind.js",
+    "build:tailwind:colors": "node --no-warnings ./src/utils/tailwind.js",
     "deps:update": "npx npm-check -u",
     "deps:check": "npx depcheck",
     "test:unit": "echo 'not yet'",
