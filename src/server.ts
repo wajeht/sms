@@ -79,6 +79,6 @@ process.on('unhandledRejection', async (reason: unknown, promise: Promise<unknow
 	if (reason instanceof Error) {
 		logger.error('Unhandled Rejection: %o, Promise: %o', reason, promise);
 	} else {
-		logger.error(`Unhandled Rejection: %o, Reason: %o`, promise, reason);
+		logger.error(`Unhandled Rejection: %s, Reason: %s`, promise, reason);
 	}
 });
