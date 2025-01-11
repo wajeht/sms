@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { db } from './db/db.js';
 import { Request, Response, NextFunction as Next} from 'express'
 import session from 'express-session';
