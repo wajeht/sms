@@ -1,5 +1,5 @@
 import express from 'express';
-import { getHealthzHandler, getHomepageHandler } from './handler.js'
+import { getHealthzHandler, getHomepageHandler } from './handler'
 
 const router = express.Router();
 

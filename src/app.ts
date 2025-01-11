@@ -3,9 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import express from 'express';
 import flash from 'connect-flash';
-import { router } from './router.js';
+import { router } from './router';
 import compression from 'compression';
-import { appConfig } from './config.js';
+import { appConfig } from './config';
 import expressLayouts from 'express-ejs-layouts';
 import { errorMiddleware, notFoundMiddleware, appLocalStateMiddleware, sessionMiddleware } from './middleware.js';
 
@@ -13,7 +13,7 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-app.use(sessionMiddleware);
+app.use(sessionMiddleware());
 
 app.use(flash());
 

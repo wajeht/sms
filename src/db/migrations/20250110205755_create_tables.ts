@@ -1,16 +1,15 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-export function up(knex) {
-	return knex.schema.createTable('sessions', (table) => {
+import type { Knex } from 'knex';
+
+export async function up(knex: Knex): Promise<void> {
+	await  knex.schema.createTable('sessions', (table) => {
 		table.string('sid', 255).primary().notNullable();
 		table.json('sess').notNullable();
 		table.timestamp('expired').notNullable();
 
 		table.index(['expired'], 'sessions_expired_index');
-	})
-		.createTable('users', (table) => {
+	});
+
+	await  knex.schema.createTable('users', (table) => {
 			table.increments('id').primary();
 			table.string('username').unique().notNullable();
 			table.string('email').unique().notNullable();
@@ -25,11 +24,8 @@ export function up(knex) {
 		});
 }
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-export function down(knex) {
-	return knex.schema.dropTableIfExists('users')
-		.dropTableIfExists('session');
+export async function down(knex: Knex): Promise<void> {
+	for (const table of ['users', 'sessions']) {
+		await knex.schema.dropTableIfExists(table);
+	}
 }

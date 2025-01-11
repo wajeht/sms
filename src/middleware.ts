@@ -1,17 +1,18 @@
 import { db } from './db/db.js';
+import { Request, Response, NextFunction as Next} from 'express'
 import session from 'express-session';
 import { csrfSync } from 'csrf-sync';
 import { sessionConfig, appConfig } from './config.js'
 import { ConnectSessionKnexStore } from 'connect-session-knex';
 
-export function notFoundMiddleware(req, res, next) {
+export function notFoundMiddleware(req: Request, res: Response, next: Next) {
 	return res.render('error.html', {
 		statusCode: 404,
 		message: 'not found'
 	})
 }
 
-export function errorMiddleware(err, req, res, next) {
+export function errorMiddleware(err: Error, req: Request, res: Response, next: Next) {
 	return res.render('error.html', {
 		statusCode: 505,
 		message: 'internal server error'
@@ -25,14 +26,16 @@ export const csrfMiddleware = (() => {
 
 	return [
 		csrfSynchronisedProtection,
-		(req, res, next) => {
+		(req: Request, res: Response, next: Next) => {
 			res.locals.csrfToken = req.csrfToken();
 			next();
 		},
 	];
 })();
 
-export const sessionMiddleware = () => session({
+export function sessionMiddleware() {
+
+ return session({
 	secret: sessionConfig.secret,
 	resave: false,
 	saveUninitialized: false,
@@ -51,8 +54,9 @@ export const sessionMiddleware = () => session({
 		secure: appConfig.env === 'production',
 	},
 });
+}
 
-export async function appLocalStateMiddleware(req, res, next) {
+export async function appLocalStateMiddleware(req: Request, res: Response, next: Next) {
 	try {
 		res.locals.state = {
 			user: req.user ?? req.session.user,
