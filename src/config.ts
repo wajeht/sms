@@ -4,7 +4,7 @@ import path from 'node:path';
 dotenv.config({ path: path.resolve(path.join(process.cwd(), '.env')) });
 
 export const appConfig = {
-  env: process.env.APP_ENV || "development",
+  env: process.env.NODE_ENV || "development",
   port: parseInt(process.env.APP_PORT || '80', 10),
   adminEmail: process.env.APP_ADMIN_EMAIL || '',
 }
