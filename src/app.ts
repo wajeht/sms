@@ -1,7 +1,7 @@
 import ejs from 'ejs';
 import cors from 'cors';
-import helmet from 'helmet';
 import express from 'express';
+import { reload } from './util';
 import flash from 'connect-flash';
 import { router } from './router';
 import compression from 'compression';
@@ -42,6 +42,8 @@ app.set('layout', '../layouts/public.html');
 app.use(expressLayouts);
 
 app.use(appLocalStateMiddleware);
+
+reload({ app, watch: [{ path: './src/views', extensions: ['.html'] }] });
 
 app.use(router);
 

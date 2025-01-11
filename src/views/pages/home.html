@@ -1,6 +1,50 @@
 <div class="px-10 py-12 bg-gradient-to-r from-[#205372] to-[#3790ad] text-white">
   <div class="mx-auto max-w-5xl w-full space-y-3">
-    <h2 class="text-3xl font-semibold px-5 py-4 border-4 border-white rounded-xl w-fit bg-[#5195b1]">SMS</h2>
+    <h2 class="text-3xl font-semibold px-5 py-4 border-4 border-white rounded-xl w-fit bg-[#5195b1]">Home</h2>
     <p>Find SMS mail address of a phone number</p>
+  </div>
+</div>
+
+<div class="p-10">
+  <div class="mx-auto max-w-5xl w-full">
+    <p class="mb-5">These addresses are pretty simple—they’re usually a 10-digit phone number followed by your mobile carrier’s domain name, like this:</p>
+    <pre class="mb-5">1234567890@carrierdomainname.com</pre>
+    <p class="mb-5">You probably already know the phone number part, but if you’re missing the domain name, don’t worry—we’ve got a list of common ones below. </p>
+    <p>Carriers are listed in alphabetical order, so just click on a letter to jump to the one you need.</p>
+  </div>
+</div>
+
+<div class="mx-auto max-w-5xl w-full p-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
+  <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
+  <div class="mx-auto max-w-5xl w-full flex gap-5 justify-evenly">
+    <% for (let i=0; i < carriers.keys.length; i++) { %>
+      <a href="#<%= carriers.keys[i] %>" class="hover:text-white hover:underline font-medium text-2xl transition-colors duration-300 ease-out"><%= carriers.keys[i] %></a>
+      <% } %>
+  </div>
+</div>
+
+<div class="mx-auto max-w-5xl w-full p-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
+  <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
+  <div class="mx-auto max-w-5xl w-full flex flex-col gap-5 justify-between">
+    <% for (let i= 0; i < carriers.keys.length; i++) { %>
+      <div>
+        <h3
+          id="<%= carriers.keys[i] %>"
+          class="font-medium text-2xl transition-colors duration-300 ease-out"
+        >
+          <%= carriers.keys[i] %>
+        </h3>
+        <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
+            <div class="mb-5">
+              <p><%= carriers.data[carriers.keys[i]][j].name %></p>
+              <ul class="pl-5">
+                <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
+                  <li><%= carriers.data[carriers.keys[i]][j].emails[k] %></li>
+                <% } %>
+              </ul>
+            </div>
+        <% } %>
+      </div>
+    <% } %>
   </div>
 </div>

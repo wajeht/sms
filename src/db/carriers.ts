@@ -1,4 +1,4 @@
-export const carriers = {
+const data = {
   3: [
     { name: '3 River Wireless', emails: ['<10-digit-number>@sms.3rivers.net'] },
   ],
@@ -283,3 +283,8 @@ export const carriers = {
   Y: [],
   Z: []
 };
+
+export const carriers = {
+  keys:Object.keys(data),
+  data
+}
