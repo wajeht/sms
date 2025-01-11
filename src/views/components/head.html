@@ -1,13 +1,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SMS - <%- title %></title>
+
+	<% if (title.length) { %>
+		<title>SMS - <%- title %></title>
+	<% } else { %>
+		<title>SMS</title>
+	<% } %>
+
 	<meta name="description" content="Find sms mail address of a phone number">
 	<meta name="keywords" content="sms, email, mail, phone">
 	<meta name="author" content="wajeht">
 
 	<!-- Preload and Preconnect -->
-	<link rel="preload" href="/style.css?v=0.4" as="style">
+	<link rel="preload" href="/style.css?v=0.0" as="style">
 	<link rel="preconnect" href="https://plausible.jaw.dev">
 
   	<!-- Icons -->
@@ -21,6 +27,6 @@
 
 	<!-- Styles and Scripts -->
   <link rel="stylesheet" href="/style.css?v=0.0">
-	<script defer data-domain="sms.jaw.dev" src="https://plausible.jaw.dev/js/script.js?v=0.1"></script>
+	<script defer data-domain="sms.jaw.dev" src="https://plausible.jaw.dev/js/script.js?v=0.0"></script>
 	<script defer data-state='<%- JSON.stringify(state) %>' src="/script.js?v=0.0"></script>
 </head>
