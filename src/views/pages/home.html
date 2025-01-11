@@ -35,15 +35,19 @@
             <div class="-bottom-[20px] left-0 w-full border-b-[1px] border-[#222222]"></div>
           </div>
         </div>
-        <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
-          <div class="mb-5">
-            <p><%= carriers.data[carriers.keys[i]][j].name %></p>
-            <ul class="pl-5">
-              <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
-                <li><%= carriers.data[carriers.keys[i]][j].emails[k] %></li>
-              <% } %>
-            </ul>
-          </div>
+        <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
+          <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
+            <div class="mb-5">
+              <p><%= carriers.data[carriers.keys[i]][j].name %></p>
+              <ul class="pl-5">
+                <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
+                  <li class="text-neutral-500"><%= carriers.data[carriers.keys[i]][j].emails[k] %></li>
+                <% } %>
+              </ul>
+            </div>
+          <% } %>
+        <% } else { %>
+          <div class="text-neutral-500 italic">No carriers found in this section</div>
         <% } %>
       </div>
     <% } %>
