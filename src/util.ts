@@ -84,9 +84,9 @@ export function reload({
 }
 
 
-export async function getCarrierWebsiteHTML() {
+export async function getCarrierWebsiteHTML(url: string) {
 	try {
-		const html = await axios.get(phoneConfig.carrierWebsiteUrl, {
+		const html = await axios.get(url, {
 			headers: {
 				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
 				'Accept-Language': 'en-US,en;q=0.9',
@@ -113,7 +113,39 @@ export async function getPhoneCarrierInfo(phoneNumber: number) {
 	}
 }
 
-export function transformHTMLToCarrierData(html: string): CarrierData {
+export function transformCarrierTwoHTMLToCarrierData(html: string): CarrierData {
+  try {
+    const document = new JSDOM(html).window.document;
+    const data: CarrierData = {};
+
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length >= 2) {
+        const carrierName = cells[0]!.textContent?.trim() || '';
+        const carrierEmail = cells[1]!.textContent?.trim() || '';
+
+        const carrierKey = carrierName[0]!.toUpperCase();
+
+        if (!data[carrierKey]) {
+          data[carrierKey] = [];
+        }
+
+        data[carrierKey].push({
+          name: carrierName,
+          emails: [carrierEmail]
+        });
+      }
+    });
+
+    return data;
+  } catch (error) {
+    console.error('Error transforming HTML into carrier data', error);
+    return {};
+  }
+}
+
+export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData {
 	try {
 		const document = new JSDOM(html).window.document;
 		const data: CarrierData = {};
@@ -157,7 +189,3 @@ export function transformHTMLToCarrierData(html: string): CarrierData {
 		return {}
 	}
 }
-
-(async ()=>{
-	console.log(await getPhoneCarrierInfo(18064204056));
-})();
