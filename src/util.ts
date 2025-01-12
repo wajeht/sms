@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { JSDOM } from 'jsdom';
 import { logger } from "./logger";
-import { appConfig } from './config';
+import { appConfig, phoneConfig } from './config';
 import axios, { AxiosError } from 'axios';
 import { Carrier, CarrierData } from "./types";
 import { Application, Request, Response, NextFunction } from 'express';
@@ -84,9 +84,9 @@ export function reload({
 }
 
 
-export async function getScrapingWebsiteHTML() {
+export async function getCarrierWebsiteHTML() {
 	try {
-		const html = await axios.get(appConfig.scrapingUrl, {
+		const html = await axios.get(phoneConfig.carrierWebsiteUrl, {
 			headers: {
 				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
 				'Accept-Language': 'en-US,en;q=0.9',
@@ -97,6 +97,16 @@ export async function getScrapingWebsiteHTML() {
 		});
 
 		return html.data; // Return the HTML content
+	} catch (error) {
+		logger.error('Error fetching carrier data %s', (error as AxiosError).message);
+		throw error;
+	}
+}
+
+export async function getPhoneCarrierInfo(phoneNumber: number) {
+	try {
+		const html = await axios.get(phoneConfig.phoneLookupURL);
+		return html.data;
 	} catch (error) {
 		logger.error('Error fetching carrier data %s', (error as AxiosError).message);
 		throw error;
@@ -147,3 +157,7 @@ export function transformHTMLToCarrierData(html: string): CarrierData {
 		return {}
 	}
 }
+
+(async ()=>{
+	console.log(await getPhoneCarrierInfo(18064204056));
+})();

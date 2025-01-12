@@ -9,7 +9,11 @@ export const appConfig = {
   appUrl: process.env.APP_URL || 'localhost',
 	env: (process.env.NODE_ENV as Env) || 'development',
 	adminEmail: process.env.APP_ADMIN_EMAIL || '',
-	scrapingUrl: process.env.APP_SCRAPING_URL || '',
+}
+
+export const phoneConfig = {
+	carrierWebsiteUrl: process.env.CARRIER_WEBSITE_URL || '',
+	phoneLookupURL: process.env.PHONE_LOOKUP_URL || ''
 }
 
 export const sessionConfig = {
