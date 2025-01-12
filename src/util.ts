@@ -103,7 +103,7 @@ export async function getScrapingWebsiteHTML() {
 	}
 }
 
-export function transformHTMLToData(html: string): CarrierData {
+export function transformHTMLToCarrierData(html: string): CarrierData {
 	try {
 		const document = new JSDOM(html).window.document;
 		const data: CarrierData = {};
