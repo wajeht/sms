@@ -30,6 +30,15 @@ export interface Api {
 	verify: (apiKey: string) => Promise<ApiKeyPayload | null>;
 }
 
+export type Carrier = {
+  name: string;
+  emails: string[];
+}
+
+export type CarrierData = {
+  [key: string]: Carrier[];
+}
+
 export type User = {
 	id: number;
 	username: string;

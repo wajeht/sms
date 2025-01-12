@@ -48,6 +48,7 @@
   },
   "description": "find sms mail address of a phone number",
   "dependencies": {
+    "axios": "^1.7.9",
     "better-sqlite3": "^11.7.2",
     "compression": "^1.7.5",
     "connect-flash": "^0.1.1",
@@ -60,6 +61,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.1",
     "helmet": "^8.0.0",
+    "jsdom": "^26.0.0",
     "knex": "^3.1.0",
     "knex-paginate": "^3.2.0",
     "pino": "^9.6.0",
@@ -72,6 +74,7 @@
     "@types/ejs": "^3.1.5",
     "@types/express-ejs-layouts": "^2.5.4",
     "@types/express-session": "^1.18.1",
+    "@types/jsdom": "^21.1.7",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
     "tailwindcss": "^3.4.17",

@@ -3,10 +3,12 @@
     "addgroup",
     "adduser",
     "ampm",
+    "apng",
     "caprover",
     "CHOKIDAR",
     "deeznutz",
     "Healthz",
+    "KHTML",
     "knexfile",
     "Millis",
     "multistream",
@@ -15,6 +17,7 @@
     "sess",
     "Synchronised",
     "USEPOLLING",
-    "wajeht"
+    "wajeht",
+    "wpsal"
   ]
 }
