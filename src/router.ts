@@ -9,8 +9,6 @@ router.get('/healthz', getHealthzHandler)
 
 router.get('/contact', getContactPageHandler)
 
-router.get('/api-docs', getAPIDocsPageHandler)
-
 router.get('/privacy-policy', getPrivacyPolicyPageHandler)
 
 router.get('/terms-of-service', getTermsOfServicePageHandler)
