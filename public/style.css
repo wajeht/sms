@@ -598,34 +598,17 @@ video {
   z-index: 10 !important;
 }
 
-.m-0 {
-  margin: 0px !important;
-}
-
 .mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-.my-10 {
-  margin-top: 2.5rem !important;
-  margin-bottom: 2.5rem !important;
 }
 
 .mb-5 {
   margin-bottom: 1.25rem !important;
 }
 
-.mt-5 {
-  margin-top: 1.25rem !important;
-}
-
 .flex {
   display: flex !important;
-}
-
-.hidden {
-  display: none !important;
 }
 
 .h-full {
@@ -661,16 +644,8 @@ video {
   flex: none !important;
 }
 
-.list-none {
-  list-style-type: none !important;
-}
-
 .flex-col {
   flex-direction: column !important;
-}
-
-.flex-col-reverse {
-  flex-direction: column-reverse !important;
 }
 
 .flex-wrap {
@@ -681,16 +656,8 @@ video {
   align-items: center !important;
 }
 
-.justify-center {
-  justify-content: center !important;
-}
-
 .justify-between {
   justify-content: space-between !important;
-}
-
-.justify-evenly {
-  justify-content: space-evenly !important;
 }
 
 .gap-5 {
@@ -779,26 +746,12 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
-.from-\[\#225877\] {
-  --tw-gradient-from: #225877 var(--tw-gradient-from-position) !important;
-  --tw-gradient-to: rgb(34 88 119 / 0) var(--tw-gradient-to-position) !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
-}
-
 .to-\[\#1a3f4a\] {
   --tw-gradient-to: #1a3f4a var(--tw-gradient-to-position) !important;
 }
 
 .to-\[\#3790ad\] {
   --tw-gradient-to: #3790ad var(--tw-gradient-to-position) !important;
-}
-
-.to-\[\#3894b1\] {
-  --tw-gradient-to: #3894b1 var(--tw-gradient-to-position) !important;
-}
-
-.p-0 {
-  padding: 0px !important;
 }
 
 .p-10 {
@@ -834,21 +787,12 @@ video {
   padding-bottom: 1.75rem !important;
 }
 
-.px-0 {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
 .pl-3 {
   padding-left: 0.75rem !important;
 }
 
 .pl-5 {
   padding-left: 1.25rem !important;
-}
-
-.pt-5 {
-  padding-top: 1.25rem !important;
 }
 
 .text-center {
@@ -863,16 +807,6 @@ video {
 .text-3xl {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
-}
-
-.text-4xl {
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important;
-}
-
-.text-sm {
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
 }
 
 .font-black {
@@ -896,6 +830,11 @@ video {
   color: rgb(76 76 76 / var(--tw-text-opacity, 1)) !important;
 }
 
+.text-\[\#8a8a8a\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(138 138 138 / var(--tw-text-opacity, 1)) !important;
+}
+
 .text-\[\#cccccc\] {
   --tw-text-opacity: 1 !important;
   color: rgb(204 204 204 / var(--tw-text-opacity, 1)) !important;
@@ -906,29 +845,9 @@ video {
   color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
 }
 
-.text-neutral-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(115 115 115 / var(--tw-text-opacity, 1)) !important;
-}
-
 .text-white {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
-}
-
-.text-neutral-400 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(163 163 163 / var(--tw-text-opacity, 1)) !important;
-}
-
-.text-\[\#205372\] {
-  --tw-text-opacity: 1 !important;
-  color: rgb(32 83 114 / var(--tw-text-opacity, 1)) !important;
-}
-
-.text-\[\#8a8a8a\] {
-  --tw-text-opacity: 1 !important;
-  color: rgb(138 138 138 / var(--tw-text-opacity, 1)) !important;
 }
 
 .transition-colors {
@@ -986,37 +905,8 @@ body {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
 }
 
-.hover\:text-\[\#3790ad\]:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(55 144 173 / var(--tw-text-opacity, 1)) !important;
-}
-
 .hover\:underline:hover {
   text-decoration-line: underline !important;
-}
-
-@media (min-width: 768px) {
-  .md\:inline {
-    display: inline !important;
-  }
-
-  .md\:flex-row {
-    flex-direction: row !important;
-  }
-
-  .md\:justify-evenly {
-    justify-content: space-evenly !important;
-  }
-
-  .md\:px-10 {
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
-  }
-
-  .md\:px-0 {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
 }
 
 @media (min-width: 1024px) {
