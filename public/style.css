@@ -590,8 +590,16 @@ video {
   bottom: -20px !important;
 }
 
+.bottom-5 {
+  bottom: 1.25rem !important;
+}
+
 .left-0 {
   left: 0px !important;
+}
+
+.right-5 {
+  right: 1.25rem !important;
 }
 
 .top-0 {
@@ -600,14 +608,6 @@ video {
 
 .top-\[110px\] {
   top: 110px !important;
-}
-
-.bottom-5 {
-  bottom: 1.25rem !important;
-}
-
-.right-5 {
-  right: 1.25rem !important;
 }
 
 .z-10 {
@@ -704,12 +704,12 @@ video {
   border-radius: 0.25rem !important;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem !important;
-}
-
 .rounded-full {
   border-radius: 9999px !important;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem !important;
 }
 
 .border {
@@ -745,6 +745,11 @@ video {
 .border-\[\#222222\] {
   --tw-border-opacity: 1 !important;
   border-color: rgb(34 34 34 / var(--tw-border-opacity, 1)) !important;
+}
+
+.border-\[\#614b4b\] {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(97 75 75 / var(--tw-border-opacity, 1)) !important;
 }
 
 .border-t-\[\#101010\] {
@@ -853,6 +858,14 @@ video {
   font-weight: 600 !important;
 }
 
+.font-bold {
+  font-weight: 700 !important;
+}
+
+.font-extrabold {
+  font-weight: 800 !important;
+}
+
 .italic {
   font-style: italic !important;
 }
@@ -882,6 +895,10 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
 }
 
+.underline {
+  text-decoration-line: underline !important;
+}
+
 .opacity-30 {
   opacity: 0.3 !important;
 }
@@ -897,14 +914,14 @@ video {
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity, 1)) !important;
 }
 
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
+.transition-all {
+  transition-property: all !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }
 
-.transition-all {
-  transition-property: all !important;
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }
@@ -913,12 +930,12 @@ video {
   transition-duration: 300ms !important;
 }
 
-.ease-out {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
-}
-
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
 }
 
 html {

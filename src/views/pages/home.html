@@ -1,25 +1,65 @@
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		window.addEventListener('scroll', function () {
-			if (window.scrollY > 400) {
-				button.classList.remove('hidden');
-			} else {
-				button.classList.add('hidden');
-			}
-		});
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to Top Button Logic
+    const button = document.getElementById('scroll-top-button');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) {
+        button.classList.remove('hidden');
+      } else {
+        button.classList.add('hidden');
+      }
+    });
 
-		const button = document.getElementById('scroll-top-button');
-		button.addEventListener('click', () => {
-			scrollToTop();
-		});
-	});
+    button.addEventListener('click', () => {
+      scrollToTop();
+    });
 
-	function scrollToTop() {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth',
-		});
-	}
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+
+    // Highlight Navigation Links Logic
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.navigation-link');
+
+    const handleScroll = () => {
+      let lastActiveLink = null;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const link = document.querySelector(
+          `.navigation-link[href="#${section.id}"]`
+        );
+
+        if (link) { // Ensure the link exists
+          if (rect.top <= 150 && rect.bottom > 0) {
+            // Section is active
+            link.classList.add('text-white', 'font-extrabold', 'underline');
+            lastActiveLink = link;
+          } else {
+            // Remove highlight only if fully scrolled past
+            link.classList.remove('text-white', 'font-extrabold', 'underline');
+          }
+        }
+      });
+
+      // Ensure the last active link remains highlighted
+      if (lastActiveLink) {
+        navLinks.forEach((link) => {
+          if (link !== lastActiveLink) {
+            link.classList.remove('text-white', 'font-extrabold', 'underline');
+          }
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    handleScroll(); // Run initially to set the correct highlight on page load
+  });
 </script>
 
 <button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out">
@@ -50,7 +90,7 @@
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
   <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
     <% for (let i=0; i < carriers.keys.length; i++) { %>
-      <a href="#<%= carriers.keys[i] %>" class="hover:text-white hover:underline font-medium text-2xl transition-colors duration-300 ease-out"><%= carriers.keys[i] %></a>
+      <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-colors duration-300 ease-out"><%= carriers.keys[i] %></a>
       <% } %>
   </div>
 </div>
