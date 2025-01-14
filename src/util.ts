@@ -195,7 +195,7 @@ export async function updateCarrier() {
 	try {
 		logger.info(`[updateCarrier] updating carrier operation started`);
 	} catch(error){
-		logger.error('[updateCarrier] error updating carrier o%', error);
+		logger.error('[updateCarrier] error updating carrier: o%', error);
 	}
 }
 
@@ -215,16 +215,16 @@ export class Cron {
 			try {
 					const task = nodeCron.schedule(cronExpression, callback);
 					this.crons.push(task);
-					logger.info(`[Cron] Scheduled task with expression: ${cronExpression}`);
+					logger.info('[Cron] Scheduled task with expression: %o', cronExpression);
 			} catch (error) {
-					logger.error(`[Cron] Error scheduling task: ${error}`);
+					logger.error('[Cron] Error scheduling task: %o', error);
 			}
 	}
 
 	public start(): void {
 			this.crons.forEach((cron) => {
 					cron.start();
-					logger.info(`[Cron] Started task: ${cron}`);
+					logger.info('[Cron] Started task: %o', cron);
 			});
 	}
 
@@ -232,7 +232,7 @@ export class Cron {
 			logger.info(`[Cron] Stopping cron services...`);
 			this.crons.forEach((cron) => {
 					cron.stop();
-					logger.info(`[Cron] Stopped task: ${cron}`);
+					logger.info('[Cron] Stopped task: %o', cron);
 			});
 	}
 }
