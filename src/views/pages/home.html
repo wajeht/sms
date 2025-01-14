@@ -79,7 +79,7 @@
   });
 </script>
 
-<button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out">
+<button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out transform hover:scale-110">
 	<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
 		<path fill="currentColor"
 			d="m11 8.8l-2.9 2.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275L13 8.8V17q0 .425-.288.713T12 18t-.712-.288T11 17z" />
@@ -107,7 +107,7 @@
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
   <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
     <% for (let i=0; i < carriers.keys.length; i++) { %>
-      <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-colors duration-300 ease-out"><%= carriers.keys[i] %></a>
+      <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-all duration-300 ease-out transform hover:scale-125"><%= carriers.keys[i] %></a>
     <% } %>
   </div>
 </div>
@@ -117,7 +117,7 @@
   <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
     <% for (let i= 0; i < carriers.keys.length; i++) { %>
       <div id="<%= carriers.keys[i] %>">
-        <div  class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
+        <div class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
           <h3 class="text-2xl font-medium px-10 lg:px-0"><%= carriers.keys[i] %></h3>
           <div aria-hidden="true">
             <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-[#101010]"></div>
@@ -127,7 +127,7 @@
         <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
           <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
             <div class="mb-5 px-10 lg:px-0">
-              <p><%= carriers.data[carriers.keys[i]][j].name %></p>
+              <p class="text-lg font-semibold"><%= carriers.data[carriers.keys[i]][j].name %></p>
               <ul class="pl-5">
                 <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
                   <li class="text-[#8a8a8a]"><%= carriers.data[carriers.keys[i]][j].emails[k] %></li>
