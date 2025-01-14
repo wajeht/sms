@@ -638,6 +638,10 @@ video {
   top: 50% !important;
 }
 
+.right-0 {
+  right: 0px !important;
+}
+
 .z-10 {
   z-index: 10 !important;
 }
@@ -685,6 +689,10 @@ video {
 
 .block {
   display: block !important;
+}
+
+.inline-block {
+  display: inline-block !important;
 }
 
 .flex {
@@ -761,6 +769,10 @@ video {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 .scroll-mt-\[500px\] {
@@ -955,6 +967,11 @@ video {
   background-color: rgb(26 26 26 / 0.9) !important;
 }
 
+.bg-gray-300 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1)) !important;
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important;
 }
@@ -1042,6 +1059,11 @@ video {
 .py-4 {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
+}
+
+.px-1 {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
 }
 
 .pl-3 {
@@ -1159,6 +1181,11 @@ video {
   color: rgb(102 102 102 / var(--tw-text-opacity, 1)) !important;
 }
 
+.text-black {
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1)) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
 }
@@ -1248,6 +1275,10 @@ video {
   transition-duration: 300ms !important;
 }
 
+.duration-200 {
+  transition-duration: 200ms !important;
+}
+
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -1302,6 +1333,66 @@ body {
   color: rgb(102 102 102 / var(--tw-text-opacity, 1)) !important;
 }
 
+.hover\:mx-1:hover {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+
+.hover\:-my-1:hover {
+  margin-top: -0.25rem !important;
+  margin-bottom: -0.25rem !important;
+}
+
+.hover\:-mx-1:hover {
+  margin-left: -0.25rem !important;
+  margin-right: -0.25rem !important;
+}
+
+.hover\:-mx-2:hover {
+  margin-left: -0.5rem !important;
+  margin-right: -0.5rem !important;
+}
+
+.hover\:-my-2:hover {
+  margin-top: -0.5rem !important;
+  margin-bottom: -0.5rem !important;
+}
+
+.hover\:-my-4:hover {
+  margin-top: -1rem !important;
+  margin-bottom: -1rem !important;
+}
+
+.hover\:-mx-4:hover {
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+}
+
+.hover\:my-2:hover {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.hover\:-my-\[4px\]:hover {
+  margin-top: -4px !important;
+  margin-bottom: -4px !important;
+}
+
+.hover\:-my-\[5px\]:hover {
+  margin-top: -5px !important;
+  margin-bottom: -5px !important;
+}
+
+.hover\:-my-\[3px\]:hover {
+  margin-top: -3px !important;
+  margin-bottom: -3px !important;
+}
+
+.hover\:-my-\[2px\]:hover {
+  margin-top: -2px !important;
+  margin-bottom: -2px !important;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05 !important;
   --tw-scale-y: 1.05 !important;
@@ -1326,6 +1417,14 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 
+.hover\:cursor-pointer:hover {
+  cursor: pointer !important;
+}
+
+.hover\:cursor-copy:hover {
+  cursor: copy !important;
+}
+
 .hover\:bg-\[\#2a2a2a\]:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(42 42 42 / var(--tw-bg-opacity, 1)) !important;
@@ -1346,9 +1445,73 @@ body {
   background-color: rgb(55 144 173 / var(--tw-bg-opacity, 1)) !important;
 }
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.hover\:bg-neutral-800:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.hover\:bg-neutral-900:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(23 23 23 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.hover\:px-2:hover {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.hover\:py-1:hover {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.hover\:px-1:hover {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+.hover\:px-4:hover {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.hover\:py-2:hover {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.hover\:py-\[\]:hover {
+  padding-top:  !important;
+  padding-bottom:  !important;
+}
+
+.hover\:py-\[4px\]:hover {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.hover\:py-\[3px\]:hover {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
+}
+
+.hover\:text-\[text-\[\#d3d3d3\]\]:hover {
+  color: text-[#d3d3d3] !important;
+}
+
+.hover\:text-\[\#d3d3d3\]:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
 }
 
 .hover\:underline:hover {
@@ -1357,6 +1520,14 @@ body {
 
 .hover\:opacity-100:hover {
   opacity: 1 !important;
+}
+
+.hover\:outline-1:hover {
+  outline-width: 1px !important;
+}
+
+.hover\:outline-white:hover {
+  outline-color: #fff !important;
 }
 
 .focus\:border-\[\#3790ad\]:focus {
@@ -1382,6 +1553,10 @@ body {
 
 .focus\:ring-white\/50:focus {
   --tw-ring-color: rgb(255 255 255 / 0.5) !important;
+}
+
+.group:hover .group-hover\:block {
+  display: block !important;
 }
 
 @media (min-width: 1024px) {

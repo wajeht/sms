@@ -77,6 +77,15 @@
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Run initially to set the correct highlight on page load
   });
+
+  function copyToClipboard(email) {
+      navigator.clipboard.writeText(email).then(() => {
+        alert('Email copied to clipboard: ' + email);
+      }).catch(err => {
+        console.error('Could not copy email: ', err);
+        alert('Failed to copy email. Please try again.');
+      });
+    }
 </script>
 
 <button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out transform hover:scale-110">
@@ -130,7 +139,11 @@
               <p class="text-lg font-semibold"><%= carriers.data[carriers.keys[i]][j].name %></p>
               <ul class="pl-5">
                 <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
-                  <li class="text-[#8a8a8a]"><%= carriers.data[carriers.keys[i]][j].emails[k] %></li>
+                  <li class="text-[#8a8a8a] relative group">
+                    <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-4 hover:py-[3px] hover:cursor-copy hover:-mx-4 hover:-my-[3px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
+                      <%= carriers.data[carriers.keys[i]][j].emails[k] %>
+                    </span>
+                  </li>
                 <% } %>
               </ul>
             </div>
