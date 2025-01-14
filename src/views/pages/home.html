@@ -30,9 +30,7 @@
 
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const link = document.querySelector(
-          `.navigation-link[href="#${section.id}"]`
-        );
+        const link = document.querySelector(`.navigation-link[href="#${section.id}"]`);
 
         if (link) { // Ensure the link exists
           if (rect.top <= 150 && rect.bottom > 0) {
@@ -56,8 +54,27 @@
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default anchor click behavior
+        const targetId = link.getAttribute('href').substring(1); // Get the target ID
+        const targetElement = document.getElementById(targetId); // Find the target element
 
+        if (targetElement) {
+          const headerOffset = 110; // Adjust this value based on your sticky header height
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth' // Smooth scroll
+          });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', handleScroll);
     handleScroll(); // Run initially to set the correct highlight on page load
   });
 </script>
@@ -91,7 +108,7 @@
   <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
     <% for (let i=0; i < carriers.keys.length; i++) { %>
       <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-colors duration-300 ease-out"><%= carriers.keys[i] %></a>
-      <% } %>
+    <% } %>
   </div>
 </div>
 
@@ -99,8 +116,8 @@
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
   <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
     <% for (let i= 0; i < carriers.keys.length; i++) { %>
-      <div>
-        <div id="<%= carriers.keys[i] %>" class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
+      <div id="<%= carriers.keys[i] %>">
+        <div  class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
           <h3 class="text-2xl font-medium px-10 lg:px-0"><%= carriers.keys[i] %></h3>
           <div aria-hidden="true">
             <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-[#101010]"></div>
