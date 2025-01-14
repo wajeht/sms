@@ -27,17 +27,17 @@ export async function up(knex: Knex): Promise<void> {
 
 		table.index('name');
 		table.index('category');
-});
+	});
 
-await knex.schema.createTable('carrier_emails', (table) => {
-	table.increments('id').primary();
+	await knex.schema.createTable('carrier_emails', (table) => {
+		table.increments('id').primary();
 		table.string('carrier_id', 255).notNullable();
 		table.string('email').notNullable();
 		table.foreign('carrier_id').references('id').inTable('carriers').onDelete('CASCADE');
 
 		table.index('carrier_id');
 		table.index('email');
-});
+	});
 }
 
 export async function down(knex: Knex): Promise<void> {

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { db } from './db/db'
 import path from "node:path";
 import { JSDOM } from 'jsdom';
 import { logger } from "./logger";
@@ -160,7 +161,8 @@ export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData 
 		for (const element of container.children) {
 			if (element.tagName === 'H3') {
 				// Create a new section
-				const sectionId = element.querySelector('a.wpsal-anchor')?.id?.toUpperCase();
+				// const sectionId = element.querySelector('a.wpsal-anchor')?.id?.toUpperCase();
+				const sectionId = element.querySelector('a.wpsal-anchor')?.parentElement?.parentElement?.lastChild?.textContent;
 
 				if (sectionId) {
 					lastSection = [];
@@ -190,15 +192,6 @@ export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData 
 		return {}
 	}
 }
-
-export async function updateCarrier() {
-	try {
-		logger.info(`[updateCarrier] updating carrier operation started`);
-	} catch(error){
-		logger.error('[updateCarrier] error updating carrier: o%', error);
-	}
-}
-
 
 export class Cron {
 	private crons: ScheduledTask[] = [];
@@ -232,3 +225,40 @@ export class Cron {
 			});
 	}
 }
+
+export async function updateCarrier() {
+	try {
+			logger.info(`[updateCarrier] updating carrier operation started`);
+
+			const data = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
+
+			await db.transaction(async (trx) => {
+					for (const key in data) {
+							// Check if the category exists
+							const categoryExists = await trx('carriers')
+									.where('category', key)
+									.first();
+
+							// If the category does not exist, insert it
+							if (!categoryExists) {
+									await trx('carriers').insert({ category: key });
+							}
+
+							// Insert or update carriers for the category
+							for (const carrier of data[key]!) {
+									await trx('carriers').insert({
+											name: carrier.name,
+											category: key
+									}).onConflict('name').merge(); // Use onConflict to update if exists
+							}
+					}
+			});
+
+	} catch (error) {
+			logger.error('[updateCarrier] error updating carrier: %o', error);
+	}
+}
+
+(async function main() {
+	await updateCarrier();
+})();
