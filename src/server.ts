@@ -1,10 +1,10 @@
 import { app } from './app';
 import { logger } from './logger';
-import { CronJobs } from './util';
 import { Server } from 'node:http';
 import { appConfig } from './config';
 import { AddressInfo } from 'node:net';
 import { db, runMigrations } from './db/db';
+import { Cron, updateCarrier } from './util';
 
 const server: Server = app.listen(appConfig.port);
 
@@ -16,7 +16,7 @@ server.on('listening', async () => {
 
 	if (appConfig.env === 'production') {
 		await runMigrations();
-		CronJobs.start();
+		new Cron([ { expression: '0 0 * * *', callback: updateCarrier } ]).start();
 	}
 });
 

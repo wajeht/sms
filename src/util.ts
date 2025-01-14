@@ -3,9 +3,9 @@ import path from "node:path";
 import { JSDOM } from 'jsdom';
 import { logger } from "./logger";
 import axios, { AxiosError } from 'axios';
-import { Carrier, CarrierData } from "./types";
 import { appConfig, phoneConfig } from './config';
 import nodeCron, { ScheduledTask} from 'node-cron';
+import { Carrier, CarrierData, CronJob } from "./types";
 import { Application, Request, Response, NextFunction } from 'express';
 
 export function reload({
@@ -199,10 +199,6 @@ export async function updateCarrier() {
 	}
 }
 
-type CronJob = {
-	expression: string;
-	callback: () => void;
-};
 
 export class Cron {
 	private crons: ScheduledTask[] = [];
@@ -236,7 +232,3 @@ export class Cron {
 			});
 	}
 }
-
-export const CronJobs = new Cron([
-	{ expression: '0 0 * * *', callback: updateCarrier },
-]);

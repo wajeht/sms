@@ -30,6 +30,11 @@ export interface Api {
 	verify: (apiKey: string) => Promise<ApiKeyPayload | null>;
 }
 
+export type CronJob = {
+	expression: string;
+	callback: () => void;
+};
+
 export type Carrier = {
   name: string;
   emails: string[];
