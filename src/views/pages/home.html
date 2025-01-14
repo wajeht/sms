@@ -105,7 +105,7 @@
 <div class="p-10">
   <div class="mx-auto max-w-5xl w-full">
     <p class="mb-5">These addresses are pretty simple—they’re usually a 10-digit phone number followed by your mobile carrier’s domain name, like this:</p>
-    <pre class="mb-5 p-3 w-fit bg-neutral-800 rounded">1234567890@carrierdomainname.com</pre>
+    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded break-all">1234567890@carrierdomainname.com</p>
     <p class="mb-5">You probably already know the phone number part, but if you’re missing the domain name, don’t worry—we’ve got a list of common ones below.</p>
     <p class="mb-5 p-3 w-fit bg-neutral-800 rounded">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
     <p>Carriers are listed in alphabetical order, so just click on a letter to jump to the one you need.</p>
@@ -140,7 +140,7 @@
               <ul class="pl-5">
                 <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
                   <li class="text-[#8a8a8a] relative group">
-                    <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-4 hover:py-[3px] hover:cursor-copy hover:-mx-4 hover:-my-[3px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
+                    <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
                       <%= carriers.data[carriers.keys[i]][j].emails[k] %>
                     </span>
                   </li>
