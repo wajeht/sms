@@ -2,9 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { JSDOM } from 'jsdom';
 import { logger } from "./logger";
-import { appConfig, phoneConfig } from './config';
 import axios, { AxiosError } from 'axios';
 import { Carrier, CarrierData } from "./types";
+import { appConfig, phoneConfig } from './config';
+import nodeCron, { ScheduledTask} from 'node-cron';
 import { Application, Request, Response, NextFunction } from 'express';
 
 export function reload({
@@ -189,3 +190,53 @@ export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData 
 		return {}
 	}
 }
+
+export async function updateCarrier() {
+	try {
+		logger.info(`[updateCarrier] updating carrier operation started`);
+	} catch(error){
+		logger.error('[updateCarrier] error updating carrier o%', error);
+	}
+}
+
+type CronJob = {
+	expression: string;
+	callback: () => void;
+};
+
+export class Cron {
+	private crons: ScheduledTask[] = [];
+
+	constructor(jobs: CronJob[]) {
+			jobs.forEach(job => this.schedule(job.expression, job.callback));
+	}
+
+	private schedule(cronExpression: string, callback: () => void): void {
+			try {
+					const task = nodeCron.schedule(cronExpression, callback);
+					this.crons.push(task);
+					logger.info(`[Cron] Scheduled task with expression: ${cronExpression}`);
+			} catch (error) {
+					logger.error(`[Cron] Error scheduling task: ${error}`);
+			}
+	}
+
+	public start(): void {
+			this.crons.forEach((cron) => {
+					cron.start();
+					logger.info(`[Cron] Started task: ${cron}`);
+			});
+	}
+
+	public stop(): void {
+			logger.info(`[Cron] Stopping cron services...`);
+			this.crons.forEach((cron) => {
+					cron.stop();
+					logger.info(`[Cron] Stopped task: ${cron}`);
+			});
+	}
+}
+
+export const CronJobs = new Cron([
+	{ expression: '0 0 * * *', callback: updateCarrier },
+]);

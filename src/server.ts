@@ -1,5 +1,6 @@
 import { app } from './app';
 import { logger } from './logger';
+import { CronJobs } from './util';
 import { Server } from 'node:http';
 import { appConfig } from './config';
 import { AddressInfo } from 'node:net';
@@ -15,6 +16,7 @@ server.on('listening', async () => {
 
 	if (appConfig.env === 'production') {
 		await runMigrations();
+		CronJobs.start();
 	}
 });
 
