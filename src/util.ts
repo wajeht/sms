@@ -226,11 +226,62 @@ export class Cron {
 	}
 }
 
+export async function mergeCarrierData(): Promise<CarrierData> {
+	const data: CarrierData = {};
+
+	const one = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
+	const two = transformCarrierTwoHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlTwo));
+
+	// Merge data from the first source
+	for (const key in one) {
+		if (!data[key]) {
+			data[key] = [];
+		}
+		one[key]!.forEach(carrier => {
+			const existingCarrier = data[key]!.find(c => c.name === carrier.name);
+			if (existingCarrier) {
+				// Add new emails if not already present
+				carrier.emails.forEach(email => {
+					if (!existingCarrier.emails.includes(email)) {
+						existingCarrier.emails.push(email);
+					}
+				});
+			} else {
+				// Add new carrier
+				data[key]!.push({ name: carrier.name, emails: [...carrier.emails] });
+			}
+		});
+	}
+
+	// Merge data from the second source
+	for (const key in two) {
+		if (!data[key]) {
+			data[key] = [];
+		}
+		two[key]!.forEach(carrier => {
+			const existingCarrier = data[key]!.find(c => c.name === carrier.name);
+			if (existingCarrier) {
+				// Add new emails if not already present
+				carrier.emails.forEach(email => {
+					if (!existingCarrier.emails.includes(email)) {
+						existingCarrier.emails.push(email);
+					}
+				});
+			} else {
+				// Add new carrier
+				data[key]!.push({ name: carrier.name, emails: [...carrier.emails] });
+			}
+		});
+	}
+
+	return data;
+}
+
 export async function updateCarrier() {
   try {
     logger.info(`[updateCarrier] Updating carrier operation started`);
 
-    const data = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
+    const data = await mergeCarrierData();
 
     await db.transaction(async (trx) => {
       for (const key in data) {
