@@ -142,7 +142,7 @@ export function transformCarrierTwoHTMLToCarrierData(html: string): CarrierData 
 
     return data;
   } catch (error) {
-    console.error('Error transforming HTML into carrier data', error);
+		logger.error('Error transforming html into carrier data data %o', error);
     return {};
   }
 }
