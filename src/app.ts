@@ -7,7 +7,13 @@ import { router } from './router';
 import compression from 'compression';
 import { appConfig } from './config';
 import expressLayouts from 'express-ejs-layouts';
-import { errorMiddleware, notFoundMiddleware, appLocalStateMiddleware, sessionMiddleware, helmetMiddleware } from './middleware';
+import {
+	errorMiddleware,
+	notFoundMiddleware,
+	appLocalStateMiddleware,
+	sessionMiddleware,
+	helmetMiddleware,
+} from './middleware';
 
 const app = express();
 

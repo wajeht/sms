@@ -16,7 +16,7 @@ server.on('listening', async () => {
 
 	if (appConfig.env === 'production') {
 		await runMigrations();
-		new Cron([ { expression: '0 0 * * *', callback: updateCarrier } ]).start();
+		new Cron([{ expression: '0 0 * * *', callback: updateCarrier }]).start();
 	}
 });
 

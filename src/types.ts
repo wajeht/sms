@@ -36,13 +36,13 @@ export type CronJob = {
 };
 
 export type Carrier = {
-  name: string;
-  emails: string[];
-}
+	name: string;
+	emails: string[];
+};
 
 export type CarrierData = {
-  [key: string]: Carrier[];
-}
+	[key: string]: Carrier[];
+};
 
 export type User = {
 	id: number;

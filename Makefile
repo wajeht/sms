@@ -1,7 +1,7 @@
 push:
 	# @make test
-	# @make lint
-	# @make format
+	@make lint
+	@make format
 	@git add -A
 	@curl -s http://commit.jaw.dev/ | sh -s -- --no-verify
 	@git push --no-verify

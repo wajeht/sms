@@ -2,28 +2,29 @@ import helmet from 'helmet';
 import { db } from './db/db.js';
 import { csrfSync } from 'csrf-sync';
 import session from 'express-session';
-import { sessionConfig, appConfig } from './config.js'
+import { sessionConfig, appConfig } from './config.js';
 import { ConnectSessionKnexStore } from 'connect-session-knex';
-import { Request, Response, NextFunction as Next} from 'express'
+import { Request, Response, NextFunction as Next } from 'express';
 
 export function notFoundMiddleware() {
- return(req: Request, res: Response, next: Next) =>{
-	return res.render('error.html', {
-		title: 'Not found',
-		statusCode: 404,
-		message: 'Sorry, the page you are looking for could not be found.'
-	})
-}
+	return (req: Request, res: Response, next: Next) => {
+		return res.render('error.html', {
+			title: 'Not found',
+			statusCode: 404,
+			message: 'Sorry, the page you are looking for could not be found.',
+		});
+	};
 }
 
 export function errorMiddleware() {
- return (err: Error, req: Request, res: Response, next: Next) =>{
-	return res.render('error.html', {
-		title: 'Error',
-		statusCode: 500,
-		message: 'The server encountered an internal error or misconfiguration and was unable to complete your request'
-	})
-}
+	return (err: Error, req: Request, res: Response, next: Next) => {
+		return res.render('error.html', {
+			title: 'Error',
+			statusCode: 500,
+			message:
+				'The server encountered an internal error or misconfiguration and was unable to complete your request',
+		});
+	};
 }
 
 export const csrfMiddleware = (() => {
@@ -67,25 +68,25 @@ export function helmetMiddleware() {
 }
 
 export function sessionMiddleware() {
- return session({
-	secret: sessionConfig.secret,
-	resave: false,
-	saveUninitialized: false,
-	store: new ConnectSessionKnexStore({
-		knex: db,
-		tableName: 'sessions',
-		createTable: false,
-	}),
-	proxy: appConfig.env === 'production',
-	cookie: {
-		path: '/',
-		domain: `.${sessionConfig.domain}`,
-		maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
-		httpOnly: appConfig.env === 'production',
-		sameSite: 'lax',
-		secure: appConfig.env === 'production',
-	},
-});
+	return session({
+		secret: sessionConfig.secret,
+		resave: false,
+		saveUninitialized: false,
+		store: new ConnectSessionKnexStore({
+			knex: db,
+			tableName: 'sessions',
+			createTable: false,
+		}),
+		proxy: appConfig.env === 'production',
+		cookie: {
+			path: '/',
+			domain: `.${sessionConfig.domain}`,
+			maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+			httpOnly: appConfig.env === 'production',
+			sameSite: 'lax',
+			secure: appConfig.env === 'production',
+		},
+	});
 }
 
 export async function appLocalStateMiddleware(req: Request, res: Response, next: Next) {

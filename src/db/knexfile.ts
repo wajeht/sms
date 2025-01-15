@@ -14,7 +14,7 @@ function _getFormattedTimestamp() {
 	return `[${formattedDate} ${formattedTime}]`;
 }
 
-const developmentEnvironmentOnly = appConfig.env === 'development';
+// const developmentEnvironmentOnly = appConfig.env === 'development';
 
 const knexConfig: Knex.Config = {
 	client: 'better-sqlite3',

@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 [v-cloak] {
-  display: none;
+	display: none;
 }
 
 * {
-  -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
-  scrollbar-width: none;
-  /* Firefox */
+	-ms-overflow-style: none;
+	/* Internet Explorer 10+ */
+	scrollbar-width: none;
+	/* Firefox */
 }
 
 *::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
+	display: none;
+	/* Safari and Chrome */
 }
 
 ::-webkit-scrollbar {
-  width: 0;
+	width: 0;
 }
 
 body {

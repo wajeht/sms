@@ -1,12 +1,12 @@
-import fs from "node:fs";
-import { db } from './db/db'
-import path from "node:path";
+import fs from 'node:fs';
+import { db } from './db/db';
+import path from 'node:path';
 import { JSDOM } from 'jsdom';
-import { logger } from "./logger";
+import { logger } from './logger';
 import axios, { AxiosError } from 'axios';
 import { appConfig, phoneConfig } from './config';
-import nodeCron, { ScheduledTask} from 'node-cron';
-import { Carrier, CarrierData, CronJob } from "./types";
+import nodeCron, { ScheduledTask } from 'node-cron';
+import { Carrier, CarrierData, CronJob } from './types';
 import { Application, Request, Response, NextFunction } from 'express';
 
 export function reload({
@@ -85,16 +85,17 @@ export function reload({
 	});
 }
 
-
 export async function getCarrierWebsiteHTML(url: string) {
 	try {
 		const html = await axios.get(url, {
 			headers: {
-				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+				'User-Agent':
+					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
 				'Accept-Language': 'en-US,en;q=0.9',
-				'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-				'Connection': 'keep-alive',
-				'Referer': 'https://www.google.com/',
+				Accept:
+					'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+				Connection: 'keep-alive',
+				Referer: 'https://www.google.com/',
 			},
 		});
 
@@ -116,35 +117,35 @@ export async function getPhoneCarrierInfo(phoneNumber: number) {
 }
 
 export function transformCarrierTwoHTMLToCarrierData(html: string): CarrierData {
-  try {
-    const document = new JSDOM(html).window.document;
-    const data: CarrierData = {};
+	try {
+		const document = new JSDOM(html).window.document;
+		const data: CarrierData = {};
 
-    const rows = document.querySelectorAll('tbody tr');
-    rows.forEach((row) => {
-      const cells = row.querySelectorAll('td');
-      if (cells.length >= 2) {
-        const carrierName = cells[0]!.textContent?.trim() || '';
-        const carrierEmail = cells[1]!.textContent?.trim() || '';
+		const rows = document.querySelectorAll('tbody tr');
+		rows.forEach((row) => {
+			const cells = row.querySelectorAll('td');
+			if (cells.length >= 2) {
+				const carrierName = cells[0]!.textContent?.trim() || '';
+				const carrierEmail = cells[1]!.textContent?.trim() || '';
 
-        const carrierKey = carrierName[0]!.toUpperCase();
+				const carrierKey = carrierName[0]!.toUpperCase();
 
-        if (!data[carrierKey]) {
-          data[carrierKey] = [];
-        }
+				if (!data[carrierKey]) {
+					data[carrierKey] = [];
+				}
 
-        data[carrierKey].push({
-          name: carrierName,
-          emails: [carrierEmail]
-        });
-      }
-    });
+				data[carrierKey].push({
+					name: carrierName,
+					emails: [carrierEmail],
+				});
+			}
+		});
 
-    return data;
-  } catch (error) {
+		return data;
+	} catch (error) {
 		logger.error('Error transforming html into carrier data data %o', error);
-    return {};
-  }
+		return {};
+	}
 }
 
 export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData {
@@ -162,13 +163,14 @@ export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData 
 			if (element.tagName === 'H3') {
 				// Create a new section
 				// const sectionId = element.querySelector('a.wpsal-anchor')?.id?.toUpperCase();
-				const sectionId = element.querySelector('a.wpsal-anchor')?.parentElement?.parentElement?.lastChild?.textContent;
+				const sectionId =
+					element.querySelector('a.wpsal-anchor')?.parentElement?.parentElement?.lastChild
+						?.textContent;
 
 				if (sectionId) {
 					lastSection = [];
 					data[sectionId] = lastSection;
 				}
-
 			} else if (element.tagName === 'P' && lastSection) {
 				// Add carrier or email pattern
 				const content = element.textContent?.trim();
@@ -189,7 +191,7 @@ export function transformCarrierOneHTMLToCarrierData(html: string): CarrierData 
 		return data;
 	} catch (error) {
 		logger.error('Error transforming html into carrier data data %o', error);
-		return {}
+		return {};
 	}
 }
 
@@ -197,51 +199,55 @@ export class Cron {
 	private crons: ScheduledTask[] = [];
 
 	constructor(jobs: CronJob[]) {
-			jobs.forEach(job => this.schedule(job.expression, job.callback));
+		jobs.forEach((job) => this.schedule(job.expression, job.callback));
 	}
 
 	private schedule(cronExpression: string, callback: () => void): void {
-			try {
-					const task = nodeCron.schedule(cronExpression, callback);
-					this.crons.push(task);
-					logger.info('[Cron] Scheduled task with expression: %o', cronExpression);
-			} catch (error) {
-					logger.error('[Cron] Error scheduling task: %o', error);
-			}
+		try {
+			const task = nodeCron.schedule(cronExpression, callback);
+			this.crons.push(task);
+			logger.info('[Cron] Scheduled task with expression: %o', cronExpression);
+		} catch (error) {
+			logger.error('[Cron] Error scheduling task: %o', error);
+		}
 	}
 
 	public start(): void {
-			this.crons.forEach((cron) => {
-					cron.start();
-					logger.info('[Cron] Started task: %o', cron);
-			});
+		this.crons.forEach((cron) => {
+			cron.start();
+			logger.info('[Cron] Started task: %o', cron);
+		});
 	}
 
 	public stop(): void {
-			logger.info(`[Cron] Stopping cron services...`);
-			this.crons.forEach((cron) => {
-					cron.stop();
-					logger.info('[Cron] Stopped task: %o', cron);
-			});
+		logger.info(`[Cron] Stopping cron services...`);
+		this.crons.forEach((cron) => {
+			cron.stop();
+			logger.info('[Cron] Stopped task: %o', cron);
+		});
 	}
 }
 
 export async function mergeCarrierData(): Promise<CarrierData> {
 	const data: CarrierData = {};
 
-	const one = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
-	const two = transformCarrierTwoHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlTwo));
+	const one = transformCarrierOneHTMLToCarrierData(
+		await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne),
+	);
+	const two = transformCarrierTwoHTMLToCarrierData(
+		await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlTwo),
+	);
 
 	// Merge data from the first source
 	for (const key in one) {
 		if (!data[key]) {
 			data[key] = [];
 		}
-		one[key]!.forEach(carrier => {
-			const existingCarrier = data[key]!.find(c => c.name === carrier.name);
+		one[key]!.forEach((carrier) => {
+			const existingCarrier = data[key]!.find((c) => c.name === carrier.name);
 			if (existingCarrier) {
 				// Add new emails if not already present
-				carrier.emails.forEach(email => {
+				carrier.emails.forEach((email) => {
 					if (!existingCarrier.emails.includes(email)) {
 						existingCarrier.emails.push(email);
 					}
@@ -258,11 +264,11 @@ export async function mergeCarrierData(): Promise<CarrierData> {
 		if (!data[key]) {
 			data[key] = [];
 		}
-		two[key]!.forEach(carrier => {
-			const existingCarrier = data[key]!.find(c => c.name === carrier.name);
+		two[key]!.forEach((carrier) => {
+			const existingCarrier = data[key]!.find((c) => c.name === carrier.name);
 			if (existingCarrier) {
 				// Add new emails if not already present
-				carrier.emails.forEach(email => {
+				carrier.emails.forEach((email) => {
 					if (!existingCarrier.emails.includes(email)) {
 						existingCarrier.emails.push(email);
 					}
@@ -278,78 +284,73 @@ export async function mergeCarrierData(): Promise<CarrierData> {
 }
 
 export async function updateCarrier() {
-  try {
-    logger.info(`[updateCarrier] Updating carrier operation started`);
+	try {
+		logger.info(`[updateCarrier] Updating carrier operation started`);
 
-    const data = await mergeCarrierData();
+		const data = await mergeCarrierData();
 
-    await db.transaction(async (trx) => {
-      for (const key in data) {
-        const categoryName = key.trim().toUpperCase();
+		await db.transaction(async (trx) => {
+			for (const key in data) {
+				const categoryName = key.trim().toUpperCase();
 
-        // Check if category exists
-        let categoryRecord = await trx('categories')
-          .where('name', categoryName)
-          .first();
+				// Check if category exists
+				let categoryRecord = await trx('categories').where('name', categoryName).first();
 
-        // Insert category if it doesn't exist
-        if (!categoryRecord) {
-          [categoryRecord] = await trx('categories')
-            .insert({ name: categoryName })
-            .returning('*');
-        }
+				// Insert category if it doesn't exist
+				if (!categoryRecord) {
+					[categoryRecord] = await trx('categories').insert({ name: categoryName }).returning('*');
+				}
 
-        for (const carrier of data[key]!) {
-          // Check if this specific carrier exists
-          const carrierExists = await trx('carriers')
-            .where('name', carrier.name.trim())
-            .where('category_id', categoryRecord.id)
-            .first();
+				for (const carrier of data[key]!) {
+					// Check if this specific carrier exists
+					const carrierExists = await trx('carriers')
+						.where('name', carrier.name.trim())
+						.where('category_id', categoryRecord.id)
+						.first();
 
-          let carrierId;
-          // Only insert if the carrier does not exist
-          if (!carrierExists) {
-            const [insertedCarrier] = await trx('carriers')
-              .insert({
-                name: carrier.name.trim(),
-                category_id: categoryRecord.id,
-              })
-              .returning('*');
-            carrierId = insertedCarrier.id;
-          } else {
-            carrierId = carrierExists.id;
-          }
+					let carrierId;
+					// Only insert if the carrier does not exist
+					if (!carrierExists) {
+						const [insertedCarrier] = await trx('carriers')
+							.insert({
+								name: carrier.name.trim(),
+								category_id: categoryRecord.id,
+							})
+							.returning('*');
+						carrierId = insertedCarrier.id;
+					} else {
+						carrierId = carrierExists.id;
+					}
 
-          // Insert carrier emails if they don't already exist
-          for (const email of carrier.emails) {
-            const emailExists = await trx('carrier_emails')
-              .where({
-                email: email.trim(),
-                carrier_id: carrierId,
-              })
-              .first();
+					// Insert carrier emails if they don't already exist
+					for (const email of carrier.emails) {
+						const emailExists = await trx('carrier_emails')
+							.where({
+								email: email.trim(),
+								carrier_id: carrierId,
+							})
+							.first();
 
-            if (!emailExists) {
-              await trx('carrier_emails')
-                .insert({
-                  email: email.trim(),
-                  carrier_id: carrierId,
-                });
-            }
-          }
-        }
-      }
-    });
+						if (!emailExists) {
+							await trx('carrier_emails').insert({
+								email: email.trim(),
+								carrier_id: carrierId,
+							});
+						}
+					}
+				}
+			}
+		});
 
-    logger.info(`[updateCarrier] Carrier update completed successfully`);
-  } catch (error) {
-    logger.error('[updateCarrier] Error updating carrier: %o', error);
-    throw error;
-  }
+		logger.info(`[updateCarrier] Carrier update completed successfully`);
+	} catch (error) {
+		logger.error('[updateCarrier] Error updating carrier: %o', error);
+		throw error;
+	}
 }
 
-export async function carrierData () {
-	const results: { category: string, name: string, email: string}[] = await db.raw(`
+export async function carrierData() {
+	const results: { category: string; name: string; email: string }[] = await db.raw(`
 		SELECT
 			cat.name AS category,
 			c.name AS name,
@@ -371,7 +372,7 @@ export async function carrierData () {
 			carriersData[category] = [];
 		}
 
-		const carrierEntry = carriersData[category].find(carrier => carrier.name === name);
+		const carrierEntry = carriersData[category].find((carrier) => carrier.name === name);
 		if (carrierEntry) {
 			// If the carrier already exists, add the email if it's not already included
 			if (!carrierEntry.emails.includes(email)) {
@@ -381,10 +382,10 @@ export async function carrierData () {
 			// If the carrier does not exist, create a new entry
 			carriersData[category].push({
 				name,
-				emails: [email] // Start with the first email
+				emails: [email], // Start with the first email
 			});
 		}
 	});
 
-	return { keys: Object.keys(carriersData), data: carriersData }
+	return { keys: Object.keys(carriersData), data: carriersData };
 }
