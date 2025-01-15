@@ -8,13 +8,9 @@ export function getHealthzHandler (req: Request, res: Response) {
 
 // GET /
 export async function getHomepageHandler(req: Request, res: Response) {
-  const nextUpdateDate = new Date();
-  nextUpdateDate.setDate(nextUpdateDate.getDate() + 1);
-  nextUpdateDate.setHours(0, 0, 0, 0);
-
   return res.render('home.html', {
     carriers: await carrierData(),
-    nextUpdateDate: nextUpdateDate.toLocaleString()
+    lastUpdatedDate: new Date(new Date().setHours(0, 0, 0, 0)).toLocaleString()
   });
 }
 

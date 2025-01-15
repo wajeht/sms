@@ -858,6 +858,11 @@ video {
   line-height: 1.75rem !important;
 }
 
+.text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
 .font-black {
   font-weight: 900 !important;
 }
