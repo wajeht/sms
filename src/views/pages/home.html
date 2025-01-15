@@ -113,14 +113,16 @@
   </div>
 </div>
 
-<div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] sticky top-0 z-20">
-  <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
-  <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
-    <% for (let i=0; i < carriers.keys.length; i++) { %>
-      <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-all duration-300 ease-out transform hover:scale-125"><%= carriers.keys[i] %></a>
-    <% } %>
+<% if (carriers.keys.length) { %>
+  <div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] sticky top-0 z-20">
+    <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
+    <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
+      <% for (let i=0; i < carriers.keys.length; i++) { %>
+        <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-all duration-300 ease-out transform hover:scale-125"><%= carriers.keys[i] %></a>
+      <% } %>
+    </div>
   </div>
-</div>
+<% } %>
 
 <div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
   <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
