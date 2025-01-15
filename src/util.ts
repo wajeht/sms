@@ -349,35 +349,42 @@ export async function updateCarrier() {
 }
 
 export async function carrierData () {
-		const results: { category: string, carrierName: string, emails: string}[] = await db.raw(`
-			SELECT
-				cat.name AS category,
-				c.name AS carrierName,
-				GROUP_CONCAT(ce.email) AS emails
-			FROM
-				carriers AS c
-			JOIN
-				carrier_emails AS ce ON c.id = ce.carrier_id
-			JOIN
-				categories AS cat ON c.category_id = cat.id
-			GROUP BY
-				cat.name, c.name
-			ORDER BY
-				cat.name
-		`);
+	const results: { category: string, name: string, email: string}[] = await db.raw(`
+		SELECT
+			cat.name AS category,
+			c.name AS name,
+			ce.email
+		FROM
+			carriers AS c
+		JOIN
+			carrier_emails AS ce ON c.id = ce.carrier_id
+		JOIN
+			categories AS cat ON c.category_id = cat.id
+		ORDER BY
+			cat.name, c.name
+	`);
 
-		// Transform results into the desired structure
-		const carriersData: { [key: string]: { name: string; emails: string[] }[] } = {};
-		results.forEach(({ category, carrierName, emails }) => {
-			const key = carrierName.charAt(0).toUpperCase(); // Get the first character of carrierName
-			if (!carriersData[key]) {
-				carriersData[key] = [];
+	// Transform results into the desired structure
+	const carriersData: { [key: string]: { name: string; emails: string[] }[] } = {};
+	results.forEach(({ category, name, email }) => {
+		if (!carriersData[category]) {
+			carriersData[category] = [];
+		}
+
+		const carrierEntry = carriersData[category].find(carrier => carrier.name === name);
+		if (carrierEntry) {
+			// If the carrier already exists, add the email if it's not already included
+			if (!carrierEntry.emails.includes(email)) {
+				carrierEntry.emails.push(email);
 			}
-			carriersData[key].push({
-				name: carrierName,
-				emails: emails.split(',') // Split concatenated emails into an array
+		} else {
+			// If the carrier does not exist, create a new entry
+			carriersData[category].push({
+				name,
+				emails: [email] // Start with the first email
 			});
-		});
+		}
+	});
 
-		return { keys: Object.keys(carriersData), data: carriersData }
+	return { keys: Object.keys(carriersData), data: carriersData }
 }
