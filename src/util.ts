@@ -348,6 +348,36 @@ export async function updateCarrier() {
   }
 }
 
-(async function main() {
-	await updateCarrier();
-})();
+export async function carrierData () {
+		const results: { category: string, carrierName: string, emails: string}[] = await db.raw(`
+			SELECT
+				cat.name AS category,
+				c.name AS carrierName,
+				GROUP_CONCAT(ce.email) AS emails
+			FROM
+				carriers AS c
+			JOIN
+				carrier_emails AS ce ON c.id = ce.carrier_id
+			JOIN
+				categories AS cat ON c.category_id = cat.id
+			GROUP BY
+				cat.name, c.name
+			ORDER BY
+				cat.name
+		`);
+
+		// Transform results into the desired structure
+		const carriersData: { [key: string]: { name: string; emails: string[] }[] } = {};
+		results.forEach(({ category, carrierName, emails }) => {
+			const key = carrierName.charAt(0).toUpperCase(); // Get the first character of carrierName
+			if (!carriersData[key]) {
+				carriersData[key] = [];
+			}
+			carriersData[key].push({
+				name: carrierName,
+				emails: emails.split(',') // Split concatenated emails into an array
+			});
+		});
+
+		return { keys: Object.keys(carriersData), data: carriersData }
+}
