@@ -124,37 +124,39 @@
   </div>
 <% } %>
 
-<div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
-  <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
-  <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
-    <% for (let i= 0; i < carriers.keys.length; i++) { %>
-      <div id="<%= carriers.keys[i] %>">
-        <div class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
-          <h3 class="text-2xl font-medium px-10 lg:px-0"><%= carriers.keys[i] %></h3>
-          <div aria-hidden="true">
-            <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-[#101010]"></div>
-            <div class="-bottom-[20px] left-0 w-full border-b-[1px] border-[#222222]"></div>
-          </div>
-        </div>
-        <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
-          <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
-            <div class="mb-5 px-10 lg:px-0">
-              <p class="text-lg font-semibold"><%= carriers.data[carriers.keys[i]][j].name %></p>
-              <ul class="pl-5">
-                <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
-                  <li class="text-[#8a8a8a] relative group">
-                    <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
-                      <%= carriers.data[carriers.keys[i]][j].emails[k] %>
-                    </span>
-                  </li>
-                <% } %>
-              </ul>
+<% if (carriers.data.length) { %>
+  <div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] border border-x-0 border-b-0 border-t-[#101010] relative">
+    <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
+    <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
+      <% for (let i= 0; i < carriers.keys.length; i++) { %>
+        <div id="<%= carriers.keys[i] %>">
+          <div class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
+            <h3 class="text-2xl font-medium px-10 lg:px-0"><%= carriers.keys[i] %></h3>
+            <div aria-hidden="true">
+              <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-[#101010]"></div>
+              <div class="-bottom-[20px] left-0 w-full border-b-[1px] border-[#222222]"></div>
             </div>
+          </div>
+          <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
+            <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
+              <div class="mb-5 px-10 lg:px-0">
+                <p class="text-lg font-semibold"><%= carriers.data[carriers.keys[i]][j].name %></p>
+                <ul class="pl-5">
+                  <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
+                    <li class="text-[#8a8a8a] relative group">
+                      <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
+                        <%= carriers.data[carriers.keys[i]][j].emails[k] %>
+                      </span>
+                    </li>
+                  <% } %>
+                </ul>
+              </div>
+            <% } %>
+          <% } else { %>
+            <div class="px-10 lg:px-0 mb-5 text-[#8a8a8a] italic">No carriers found in this section</div>
           <% } %>
-        <% } else { %>
-          <div class="px-10 lg:px-0 mb-5 text-[#8a8a8a] italic">No carriers found in this section</div>
-        <% } %>
-      </div>
-    <% } %>
+        </div>
+      <% } %>
+    </div>
   </div>
-</div>
+<% } %>
