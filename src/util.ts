@@ -389,18 +389,3 @@ export async function carrierData() {
 
 	return { keys: Object.keys(carriersData), data: carriersData };
 }
-
-export function Cache<T>(): CacheType<T> {
-	const cache = new Map<string, T>();
-	return {
-		set(key: string, value: T): void {
-			cache.set(key, value);
-		},
-		get(key: string): T | null {
-			return cache.get(key) ?? null;
-		},
-		clear(key: string): void {
-			cache.delete(key);
-		},
-	};
-}

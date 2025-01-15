@@ -66,9 +66,3 @@ export type GithubUserEmail = {
 	verified: boolean;
 	visibility: string | null;
 };
-
-export type CacheType<T> = {
-	set(key: string, value: T): void;
-	get(key: string): T | null;
-	clear(key: string): void;
-};
