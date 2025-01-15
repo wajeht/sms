@@ -30,13 +30,7 @@ export async function up(knex: Knex): Promise<void> {
     await knex.schema.createTable('carriers', (table) => {
         table.increments('id').primary();
         table.string('name').notNullable();
-        table
-            .integer('category_id')
-            .unsigned()
-            .notNullable()
-            .references('id')
-            .inTable('categories')
-            .onDelete('NO ACTION');
+        table.integer('category_id').unsigned().references('id').inTable('categories').onDelete('CASCADE');
         table.timestamps(true, true);
 
         table.index('name');
@@ -48,13 +42,7 @@ export async function up(knex: Knex): Promise<void> {
     await knex.schema.createTable('carrier_emails', (table) => {
         table.increments('id').primary();
         table.string('email').notNullable();
-        table
-            .integer('carrier_id')
-            .unsigned()
-            .notNullable()
-            .references('id')
-            .inTable('carriers')
-            .onDelete('NO ACTION');
+        table.integer('carrier_id').unsigned().references('id').inTable('carriers').onDelete('NO ACTION');
         table.timestamps(true, true);
 
         table.index('carrier_id');
