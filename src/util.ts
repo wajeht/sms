@@ -227,36 +227,74 @@ export class Cron {
 }
 
 export async function updateCarrier() {
-	try {
-			logger.info(`[updateCarrier] updating carrier operation started`);
+  try {
+    logger.info(`[updateCarrier] Updating carrier operation started`);
 
-			const data = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
+    const data = transformCarrierOneHTMLToCarrierData(await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne));
 
-			await db.transaction(async (trx) => {
-					for (const key in data) {
-							// Check if the category exists
-							const categoryExists = await trx('carriers')
-									.where('category', key)
-									.first();
+    await db.transaction(async (trx) => {
+      for (const key in data) {
+        const categoryName = key.trim().toUpperCase();
 
-							// If the category does not exist, insert it
-							if (!categoryExists) {
-									await trx('carriers').insert({ category: key });
-							}
+        // Check if category exists
+        let categoryRecord = await trx('categories')
+          .where('name', categoryName)
+          .first();
 
-							// Insert or update carriers for the category
-							for (const carrier of data[key]!) {
-									await trx('carriers').insert({
-											name: carrier.name,
-											category: key
-									}).onConflict('name').merge(); // Use onConflict to update if exists
-							}
-					}
-			});
+        // Insert category if it doesn't exist
+        if (!categoryRecord) {
+          [categoryRecord] = await trx('categories')
+            .insert({ name: categoryName })
+            .returning('*');
+        }
 
-	} catch (error) {
-			logger.error('[updateCarrier] error updating carrier: %o', error);
-	}
+        for (const carrier of data[key]!) {
+          // Check if this specific carrier exists
+          const carrierExists = await trx('carriers')
+            .where('name', carrier.name.trim())
+            .where('category_id', categoryRecord.id)
+            .first();
+
+          let carrierId;
+          // Only insert if the carrier does not exist
+          if (!carrierExists) {
+            const [insertedCarrier] = await trx('carriers')
+              .insert({
+                name: carrier.name.trim(),
+                category_id: categoryRecord.id,
+              })
+              .returning('*');
+            carrierId = insertedCarrier.id;
+          } else {
+            carrierId = carrierExists.id;
+          }
+
+          // Insert carrier emails if they don't already exist
+          for (const email of carrier.emails) {
+            const emailExists = await trx('carrier_emails')
+              .where({
+                email: email.trim(),
+                carrier_id: carrierId,
+              })
+              .first();
+
+            if (!emailExists) {
+              await trx('carrier_emails')
+                .insert({
+                  email: email.trim(),
+                  carrier_id: carrierId,
+                });
+            }
+          }
+        }
+      }
+    });
+
+    logger.info(`[updateCarrier] Carrier update completed successfully`);
+  } catch (error) {
+    logger.error('[updateCarrier] Error updating carrier: %o', error);
+    throw error;
+  }
 }
 
 (async function main() {
