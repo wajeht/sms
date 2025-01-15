@@ -6,7 +6,7 @@ import { logger } from './logger';
 import axios, { AxiosError } from 'axios';
 import { appConfig, phoneConfig } from './config';
 import nodeCron, { ScheduledTask } from 'node-cron';
-import { Carrier, CarrierData, CronJob, CacheType } from './types';
+import { Carrier, CarrierData, CronJob } from './types';
 import { Application, Request, Response, NextFunction } from 'express';
 
 export function reload({
