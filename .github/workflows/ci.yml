@@ -80,7 +80,7 @@ jobs:
         run: npm run lint
 
   format:
-    needs: [lint, unit-test]
+    needs: [lint]
     name: Prettier format
     runs-on: ubuntu-latest
 
