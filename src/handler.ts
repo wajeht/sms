@@ -1,5 +1,6 @@
-import { carrierData } from './util';
+import { carrierData, Cache } from './util';
 import { Request, Response } from 'express';
+const carrierCache = Cache<Awaited<ReturnType<typeof carrierData>>>();
 
 // GET /healthz
 export function getHealthzHandler(req: Request, res: Response) {
@@ -8,8 +9,15 @@ export function getHealthzHandler(req: Request, res: Response) {
 
 // GET /
 export async function getHomepageHandler(req: Request, res: Response) {
+	let carriers = carrierCache.get('carriers');
+
+	if (!carriers) {
+		carriers = await carrierData();
+		carrierCache.set('carriers', carriers);
+	}
+
 	return res.render('home.html', {
-		carriers: await carrierData(),
+		carriers,
 		lastUpdatedDate: new Date(new Date().setHours(0, 0, 0, 0)).toLocaleString(),
 	});
 }
