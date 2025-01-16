@@ -695,6 +695,30 @@ video {
   height: 2.5rem !important;
 }
 
+.h-\[10px\] {
+  height: 10px !important;
+}
+
+.h-\[20px\] {
+  height: 20px !important;
+}
+
+.h-\[40px\] {
+  height: 40px !important;
+}
+
+.h-\[25px\] {
+  height: 25px !important;
+}
+
+.h-\[\] {
+  height:  !important;
+}
+
+.h-\[25p\] {
+  height: 25p !important;
+}
+
 .min-h-screen {
   min-height: 100vh !important;
 }
@@ -708,8 +732,44 @@ video {
   width: 100% !important;
 }
 
+.w-\[25px\] {
+  width: 25px !important;
+}
+
+.w-\[25p\] {
+  width: 25p !important;
+}
+
+.w-\[2\] {
+  width: 2 !important;
+}
+
 .min-w-\[2\.5rem\] {
   min-width: 2.5rem !important;
+}
+
+.min-w-\[\] {
+  min-width:  !important;
+}
+
+.min-w-\[10\] {
+  min-width: 10 !important;
+}
+
+.min-w-\[10px\] {
+  min-width: 10px !important;
+}
+
+.min-w-\[20px\] {
+  min-width: 20px !important;
+}
+
+.min-w-\[40px\] {
+  min-width: 40px !important;
+}
+
+.min-w-\[25px\] {
+  min-width: 25px !important;
 }
 
 .max-w-5xl {
@@ -779,6 +839,10 @@ video {
 
 .gap-2 {
   gap: 0.5rem !important;
+}
+
+.gap-1 {
+  gap: 0.25rem !important;
 }
 
 .space-y-16 > :not([hidden]) ~ :not([hidden]) {
@@ -1005,6 +1069,14 @@ video {
 
 .p-1 {
   padding: 0.25rem !important;
+}
+
+.p-\[25px\] {
+  padding: 25px !important;
+}
+
+.p-\[17px\] {
+  padding: 17px !important;
 }
 
 .px-10 {
