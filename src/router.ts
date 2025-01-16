@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-	getContactPageHandler,
+	getAPIPageHandler,
 	getHealthzHandler,
 	getHomepageHandler,
 	getPrivacyPolicyPageHandler,
@@ -13,7 +13,7 @@ router.get('/', getHomepageHandler);
 
 router.get('/healthz', getHealthzHandler);
 
-router.get('/contact', getContactPageHandler);
+router.get('/api', getAPIPageHandler);
 
 router.get('/privacy-policy', getPrivacyPolicyPageHandler);
 

@@ -80,13 +80,13 @@
   });
 
   function copyToClipboard(email) {
-      navigator.clipboard.writeText(email).then(() => {
-        alert('Email copied to clipboard: ' + email);
-      }).catch(err => {
-        console.error('Could not copy email: ', err);
-        alert('Failed to copy email. Please try again.');
-      });
-    }
+    navigator.clipboard.writeText(email).then(() => {
+      alert('Email copied to clipboard: ' + email);
+    }).catch(err => {
+      console.error('Could not copy email: ', err);
+      alert('Failed to copy email. Please try again.');
+    });
+  }
 </script>
 
 <button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out transform hover:scale-110 hover:bg-neutral-700">

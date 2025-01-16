@@ -25,6 +25,6 @@ export function getTermsOfServicePageHandler(req: Request, res: Response) {
 }
 
 // GET /contact
-export function getContactPageHandler(req: Request, res: Response) {
-	return res.render('contact.html', { title: 'Contact' });
+export function getAPIPageHandler(req: Request, res: Response) {
+	return res.render('api.html', { title: 'API' });
 }
