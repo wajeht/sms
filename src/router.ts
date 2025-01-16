@@ -13,6 +13,8 @@ router.get('/', getHomepageHandler);
 
 router.get('/healthz', getHealthzHandler);
 
+router.get('/update', getHealthzHandler);
+
 router.get('/api', getAPIPageHandler);
 
 router.get('/privacy-policy', getPrivacyPolicyPageHandler);

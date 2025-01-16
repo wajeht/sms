@@ -1,4 +1,4 @@
-import { carrierData } from './util';
+import { carrierData, updateCarrier } from './util';
 import { Request, Response } from 'express';
 
 // GET /healthz
@@ -12,6 +12,12 @@ export async function getHomepageHandler(req: Request, res: Response) {
 		carriers: await carrierData(),
 		lastUpdatedDate: new Date(new Date().setHours(0, 0, 0, 0)).toLocaleString(),
 	});
+}
+
+// GET /update
+export async function getUpdateHandler(req: Request, res: Response) {
+	await updateCarrier();
+	res.status(200).send('ok');
 }
 
 // GET /privacy-policy
