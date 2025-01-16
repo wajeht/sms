@@ -17,7 +17,11 @@ export async function getHomepageHandler(req: Request, res: Response) {
 // GET /update
 export async function getUpdateHandler(req: Request, res: Response) {
 	await updateCarrier();
-	return res.redirect('back');
+	return res.redirect(
+		req.headers?.referer && new URL(req.headers?.referer).pathname === req.path
+			? req.headers?.referer
+			: '/',
+	);
 }
 
 // GET /privacy-policy
