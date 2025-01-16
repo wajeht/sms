@@ -21,24 +21,24 @@ export class Cron {
 		try {
 			const task = nodeCron.schedule(cronExpression, callback);
 			this.crons.push(task);
-			logger.info('[Cron] Scheduled task with expression: %o', cronExpression);
+			logger.info('[Cron#schedule] Scheduled task with expression: %o', cronExpression);
 		} catch (error) {
-			logger.error('[Cron] Error scheduling task: %o', error);
+			logger.error('[Cron#schedule] Error scheduling task: %o', error);
 		}
 	}
 
 	public start(): void {
 		this.crons.forEach((cron) => {
 			cron.start();
-			logger.info('[Cron] Started task: %o', cron);
+			logger.info('[Cron#start] Started task: %o', cron);
 		});
 	}
 
 	public stop(): void {
-		logger.info(`[Cron] Stopping cron services...`);
+		logger.info(`[Cron#stop] Stopping cron services...`);
 		this.crons.forEach((cron) => {
 			cron.stop();
-			logger.info('[Cron] Stopped task: %o', cron);
+			logger.info('[Cron#stop] Stopped task: %o', cron);
 		});
 	}
 }
@@ -135,7 +135,10 @@ export async function getCarrierWebsiteHTML(url: string) {
 
 		return html.data; // Return the HTML content
 	} catch (error) {
-		logger.error('Error fetching carrier data %s', (error as AxiosError).message);
+		logger.error(
+			'[getCarrierWebsiteHTML] Error fetching carrier data %s',
+			(error as AxiosError).message,
+		);
 		throw '';
 	}
 }
@@ -158,16 +161,23 @@ export function extractCarrierDataFromSourceTwo(html: string): CarrierData {
 					data[carrierKey] = [];
 				}
 
+				const emailList = carrierEmail.includes('\n')
+					? carrierEmail.split('\n').map((email) => email.trim())
+					: [carrierEmail];
+
 				data[carrierKey].push({
 					name: carrierName,
-					emails: [carrierEmail],
+					emails: emailList,
 				});
 			}
 		});
 
 		return data;
 	} catch (error) {
-		logger.error('Error transforming html into carrier data data %o', error);
+		logger.error(
+			'[extractCarrierDataFromSourceTwo] Error transforming html into carrier data data %o',
+			error,
+		);
 		return {};
 	}
 }
@@ -214,7 +224,10 @@ export function extractCarrierDataFromSourceOne(html: string): CarrierData {
 		}
 		return data;
 	} catch (error) {
-		logger.error('Error transforming html into carrier data data %o', error);
+		logger.error(
+			'[extractCarrierDataFromSourceOne] Error transforming html into carrier data data %o',
+			error,
+		);
 		return {};
 	}
 }
