@@ -89,14 +89,14 @@
     }
 </script>
 
-<button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out transform hover:scale-110">
+<button id="scroll-top-button" title="scroll to top" class="fixed bottom-5 right-5 hidden btn btn-sm btn-neutral opacity-30 rounded-full hover:opacity-100 ring-white ring-1 z-10 btn-circle transition-all duration-300 ease-in-out transform hover:scale-110 hover:bg-neutral-700">
 	<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
 		<path fill="currentColor"
 			d="m11 8.8l-2.9 2.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275L13 8.8V17q0 .425-.288.713T12 18t-.712-.288T11 17z" />
 	</svg>
 </button>
 
-<div class="p-10 bg-gradient-to-r from-[#205372] to-[#3790ad] text-white">
+<div class="p-10 bg-gradient-to-r from-[#205372] to-[#3790ad] text-white rounded-lg shadow-lg">
   <div class="mx-auto max-w-5xl w-full">
     <h2 class="text-3xl font-semibold">Find SMS mail address of a phone number</h2>
     <p>Don’t just wonder, uncover it</p>
@@ -106,9 +106,9 @@
 <div class="p-10">
   <div class="mx-auto max-w-5xl w-full">
     <p class="mb-5">These addresses are pretty simple—they’re usually a 10-digit phone number followed by your mobile carrier’s domain name, like this:</p>
-    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded break-all">1234567890@carrierdomainname.com</p>
+    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded shadow-md">1234567890@carrierdomainname.com</p>
     <p class="mb-5">You probably already know the phone number part, but if you’re missing the domain name, don’t worry—we’ve got a list of common ones below.</p>
-    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
+    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded shadow-md">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
     <p class="mb-5">Carriers are listed in alphabetical order, so just click on a letter to jump to the one you need.</p>
     <% if (carriers.keys.length) { %>
       <p class="italic break-all text-sm">Last updated on <%= lastUpdatedDate %></p>
@@ -121,7 +121,7 @@
     <div class="absolute top-0 left-0 w-full border-t-[1px] border-[#222222]" aria-hidden="true"></div>
     <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-5 lg:justify-between flex-wrap">
       <% for (let i=0; i < carriers.keys.length; i++) { %>
-        <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-all duration-300 ease-out transform hover:scale-125"><%= carriers.keys[i] %></a>
+        <a href="#<%= carriers.keys[i] %>" class="navigation-link hover:text-white hover:underline font-medium text-2xl transition-all duration-300 ease-out transform hover:scale-110"><%= carriers.keys[i] %></a>
       <% } %>
     </div>
   </div>
@@ -143,7 +143,7 @@
           <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
             <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
               <div class="mb-5 px-10 lg:px-0">
-                <p class="text-lg font-semibold"><%= carriers.data[carriers.keys[i]][j].name %></p>
+                <p class="text-lg font-semibold hover:text-[#d3d3d3] transition-colors duration-200"><%= carriers.data[carriers.keys[i]][j].name %></p>
                 <ul class="pl-5">
                   <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
                     <li class="text-[#8a8a8a] relative group">
