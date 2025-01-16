@@ -1,5 +1,5 @@
-import { carrierData, updateCarrier } from './util';
 import { Request, Response } from 'express';
+import { carrierData, updateCarrierQueue } from './util';
 
 // GET /healthz
 export function getHealthzHandler(req: Request, res: Response) {
@@ -16,7 +16,7 @@ export async function getHomepageHandler(req: Request, res: Response) {
 
 // GET /update
 export async function getUpdateHandler(req: Request, res: Response) {
-	await updateCarrier();
+	updateCarrierQueue.push({});
 	return res.redirect(
 		req.headers?.referer && new URL(req.headers?.referer).pathname === req.path
 			? req.headers?.referer

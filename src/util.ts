@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import fastq from 'fastq';
 import { db } from './db/db';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
@@ -389,3 +390,5 @@ export async function carrierData() {
 
 	return { keys: Object.keys(carriersData), data: carriersData };
 }
+
+export const updateCarrierQueue = fastq.promise(updateCarrier, 10);
