@@ -14,7 +14,6 @@ export const appConfig = {
 export const phoneConfig = {
 	carrierWebsiteUrlOne: process.env.CARRIER_WEBSITE_URL_ONE || '',
 	carrierWebsiteUrlTwo: process.env.CARRIER_WEBSITE_URL_TWO || '',
-	phoneLookupURL: process.env.PHONE_LOOKUP_URL || '',
 };
 
 export const sessionConfig = {

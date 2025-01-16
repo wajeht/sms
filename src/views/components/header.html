@@ -1,7 +1,7 @@
-<header class="px-10 py-7 z-10 bg-[#121d28] text-[#cccccc]"
-	role="banner">
+<header class="px-10 py-7 z-10 bg-[#121d28] text-[#cccccc]" role="banner">
+
 	<div class="mx-auto max-w-5xl flex justify-between w-full">
-		<!-- Logo/Brand Section -->
+
 		<div class="flex-1">
 			<a href="/" class="text-2xl font-black hover:text-white transition-colors duration-300 ease-out border-2 px-2 py-1 rounded-lg"
 				aria-label="SMS - Return to homepage">
@@ -9,7 +9,6 @@
 			</a>
 		</div>
 
-		<!-- Main Navigation -->
 		<nav aria-label="Legal pages navigation" class="flex-none">
 			<ul class="flex gap-7 items-center" role="list">
 				<li><a href="/api" class="hover:text-white font-medium hover:underline transition-colors duration-300 ease-out <%= state.path === '/api' ? 'underline text-white' : ''  %>">API</a></li>
@@ -23,5 +22,7 @@
 				</li>
 			</ul>
 		</nav>
+
 	</div>
+
 </header>

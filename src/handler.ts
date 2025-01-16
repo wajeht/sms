@@ -17,11 +17,19 @@ export async function getHomepageHandler(req: Request, res: Response) {
 // GET /update
 export async function getUpdateHandler(req: Request, res: Response) {
 	updateCarrierQueue.push({});
-	return res.redirect(
-		req.headers?.referer && new URL(req.headers?.referer).pathname === req.path
-			? req.headers?.referer
-			: '/',
-	);
+
+	try {
+		if (req.headers?.referer) {
+			const refererUrl = new URL(req.headers.referer);
+			if (refererUrl.pathname === req.path) {
+				return res.redirect(req.headers.referer);
+			}
+		}
+	} catch {
+		return res.redirect('/');
+	}
+
+	return res.redirect('/');
 }
 
 // GET /privacy-policy

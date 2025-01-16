@@ -1,5 +1,6 @@
 import helmet from 'helmet';
 import { db } from './db/db.js';
+import { logger } from './logger';
 import { csrfSync } from 'csrf-sync';
 import session from 'express-session';
 import { sessionConfig, appConfig } from './config.js';
@@ -7,7 +8,7 @@ import { ConnectSessionKnexStore } from 'connect-session-knex';
 import { Request, Response, NextFunction as Next } from 'express';
 
 export function notFoundMiddleware() {
-	return (req: Request, res: Response, next: Next) => {
+	return (req: Request, res: Response, _next: Next) => {
 		return res.render('error.html', {
 			title: 'Not found',
 			statusCode: 404,
@@ -17,7 +18,13 @@ export function notFoundMiddleware() {
 }
 
 export function errorMiddleware() {
-	return (err: Error, req: Request, res: Response, next: Next) => {
+	return (err: Error, req: Request, res: Response, _next: Next) => {
+		logger.error(
+			`[errorMiddleware] error message: %s, status: %d, full error: %o`,
+			err.message,
+			500,
+			err,
+		);
 		return res.render('error.html', {
 			title: 'Error',
 			statusCode: 500,
