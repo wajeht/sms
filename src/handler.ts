@@ -46,3 +46,16 @@ export function getTermsOfServicePageHandler(req: Request, res: Response) {
 export function getAPIPageHandler(req: Request, res: Response) {
 	return res.render('api.html', { title: 'API' });
 }
+
+export async function getAPICategoriesHandler(req: Request, res: Response) {
+	res.json({ message: 'ok' });
+}
+export async function getAPICategoriesNameHandler(req: Request, res: Response) {
+	res.json({ message: 'ok' });
+}
+export async function getAPICarriersHandler(req: Request, res: Response) {
+	res.json({ message: 'ok' });
+}
+export async function getAPICarriersNameHandler(req: Request, res: Response) {
+	res.json({ message: 'ok' });
+}
