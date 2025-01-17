@@ -47,15 +47,22 @@ export function getAPIPageHandler(req: Request, res: Response) {
 	return res.render('api.html', { title: 'API' });
 }
 
+// GET /api/categories
 export async function getAPICategoriesHandler(req: Request, res: Response) {
 	res.json({ message: 'ok' });
 }
+
+// GET /api/categories/:name
 export async function getAPICategoriesNameHandler(req: Request, res: Response) {
 	res.json({ message: 'ok' });
 }
+
+// GET /api/carriers
 export async function getAPICarriersHandler(req: Request, res: Response) {
 	res.json({ message: 'ok' });
 }
+
+// GET /api/carriers/:name
 export async function getAPICarriersNameHandler(req: Request, res: Response) {
 	res.json({ message: 'ok' });
 }
