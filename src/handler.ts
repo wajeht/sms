@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { carrierData, updateCarrierQueue } from './util';
+import { db } from './db/db';
 
 // GET /healthz
 export function getHealthzHandler(req: Request, res: Response) {
@@ -49,7 +50,34 @@ export function getAPIPageHandler(req: Request, res: Response) {
 
 // GET /api/categories
 export async function getAPICategoriesHandler(req: Request, res: Response) {
-	res.json({ message: 'ok' });
+	const result = (await db.raw(`
+		SELECT
+			cat.id AS category_id,
+			cat.name AS category,
+			json_group_array(
+				json_object(
+					'id', c.id,
+					'name', c.name
+				)
+			) AS carriers
+		FROM
+			categories AS cat
+		LEFT JOIN
+			carriers AS c ON c.category_id = cat.id
+		GROUP BY
+			cat.id,
+			cat.name
+		ORDER BY
+			cat.name ASC
+	`)) as any[];
+
+	res.json({
+		data: result.map((row) => ({
+			id: row.category_id,
+			name: row.category,
+			carriers: JSON.parse(row.carriers),
+		})),
+	});
 }
 
 // GET /api/categories/:name
