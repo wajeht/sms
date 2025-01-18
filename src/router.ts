@@ -32,6 +32,6 @@ router.get('/api/categories/:name', getAPICategoriesNameHandler);
 
 router.get('/api/carriers', getAPICarriersHandler);
 
-router.get('/api/carriers/:name', getAPICarriersNameHandler);
+router.get('/api/carriers/:id', getAPICarriersNameHandler);
 
 export { router };

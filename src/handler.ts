@@ -117,10 +117,47 @@ export async function getAPICategoriesNameHandler(req: Request, res: Response) {
 
 // GET /api/carriers
 export async function getAPICarriersHandler(req: Request, res: Response) {
-	res.json({ message: 'ok' });
+	const result = await db
+		.select(
+			'carriers.id',
+			'carriers.name',
+			db.raw(
+				"json_group_array(json_object('id', carrier_emails.id, 'email', carrier_emails.email)) as emails",
+			),
+		)
+		.from('carriers')
+		.leftJoin('carrier_emails', 'carriers.id', 'carrier_emails.carrier_id')
+		.groupBy('carriers.id', 'carriers.name')
+		.orderBy('carriers.name');
+
+	res.json({
+		data: result.map((row) => ({
+			...row,
+			emails: JSON.parse(row.emails),
+		})),
+	});
 }
 
-// GET /api/carriers/:name
+// GET /api/carriers/:id
 export async function getAPICarriersNameHandler(req: Request, res: Response) {
-	res.json({ message: 'ok' });
+	const result = await db
+		.select(
+			'carriers.id',
+			'carriers.name',
+			db.raw(
+				"json_group_array(json_object('id', carrier_emails.id, 'email', carrier_emails.email)) as emails",
+			),
+		)
+		.from('carriers')
+		.leftJoin('carrier_emails', 'carriers.id', 'carrier_emails.carrier_id')
+		.where('carriers.id', req.params.id)
+		.groupBy('carriers.id', 'carriers.name')
+		.first();
+
+	res.json({
+		data: {
+			...result,
+			emails: JSON.parse(result.emails),
+		},
+	});
 }
