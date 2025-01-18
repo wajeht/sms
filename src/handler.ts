@@ -161,3 +161,10 @@ export async function getAPICarriersNameHandler(req: Request, res: Response) {
 		},
 	});
 }
+
+// GET /api/emails
+export async function getAPIEmailsHandler(req: Request, res: Response) {
+	res.json({
+		data: await db.select('email').from('carrier_emails'),
+	});
+}

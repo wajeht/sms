@@ -10,6 +10,7 @@ import {
 	getAPICategoriesNameHandler,
 	getAPICarriersHandler,
 	getAPICarriersNameHandler,
+	getAPIEmailsHandler,
 } from './handler';
 
 const router = express.Router();
@@ -33,5 +34,7 @@ router.get('/api/categories/:name', getAPICategoriesNameHandler);
 router.get('/api/carriers', getAPICarriersHandler);
 
 router.get('/api/carriers/:id', getAPICarriersNameHandler);
+
+router.get('/api/emails', getAPIEmailsHandler);
 
 export { router };
