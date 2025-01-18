@@ -82,21 +82,35 @@ export async function getAPICategoriesHandler(req: Request, res: Response) {
 
 // GET /api/categories/:name
 export async function getAPICategoriesNameHandler(req: Request, res: Response) {
-	const category = await db
-		.select('id', 'name')
-		.from('categories')
-		.where('name', 'like', `%${req.params.name?.trim()}%`)
-		.first();
-
-	const carriers = await db
-		.select('id', 'name')
-		.from('carriers')
-		.where({ category_id: category.id });
+	const result = (await db.raw(
+		`
+			SELECT
+					cat.id AS category_id,
+					cat.name AS category,
+					json_group_array(
+							json_object(
+									'id', c.id,
+									'name', c.name
+							)
+					) AS carriers
+			FROM
+					categories AS cat
+			LEFT JOIN
+					carriers AS c ON c.category_id = cat.id
+			WHERE
+					cat.name LIKE ?
+			GROUP BY
+					cat.id,
+					cat.name
+	`,
+		[`%${req.params.name?.trim()}%`],
+	)) as any[];
 
 	res.json({
 		data: {
-			...category,
-			carriers,
+			id: result[0].category_id,
+			name: result[0].category,
+			carriers: JSON.parse(result[0].carriers),
 		},
 	});
 }
