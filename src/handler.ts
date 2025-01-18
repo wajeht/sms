@@ -50,26 +50,16 @@ export function getAPIPageHandler(req: Request, res: Response) {
 
 // GET /api/categories
 export async function getAPICategoriesHandler(req: Request, res: Response) {
-	const result = (await db.raw(`
-		SELECT
-			cat.id AS category_id,
-			cat.name AS category,
-			json_group_array(
-				json_object(
-					'id', c.id,
-					'name', c.name
-				)
-			) AS carriers
-		FROM
-			categories AS cat
-		LEFT JOIN
-			carriers AS c ON c.category_id = cat.id
-		GROUP BY
-			cat.id,
-			cat.name
-		ORDER BY
-			cat.name ASC
-	`)) as any[];
+	const result = await db
+		.select(
+			'categories.id as category_id',
+			'categories.name as category',
+			db.raw("json_group_array(json_object('id', carriers.id, 'name', carriers.name)) as carriers"),
+		)
+		.from('categories')
+		.leftJoin('carriers', 'carriers.category_id', 'categories.id')
+		.groupBy('categories.id', 'categories.name')
+		.orderBy('categories.name');
 
 	res.json({
 		data: result.map((row) => ({
@@ -82,35 +72,23 @@ export async function getAPICategoriesHandler(req: Request, res: Response) {
 
 // GET /api/categories/:name
 export async function getAPICategoriesNameHandler(req: Request, res: Response) {
-	const result = (await db.raw(
-		`
-			SELECT
-					cat.id AS category_id,
-					cat.name AS category,
-					json_group_array(
-							json_object(
-									'id', c.id,
-									'name', c.name
-							)
-					) AS carriers
-			FROM
-					categories AS cat
-			LEFT JOIN
-					carriers AS c ON c.category_id = cat.id
-			WHERE
-					cat.name LIKE ?
-			GROUP BY
-					cat.id,
-					cat.name
-	`,
-		[`%${req.params.name?.trim()}%`],
-	)) as any[];
+	const result = await db
+		.select(
+			'categories.id as category_id',
+			'categories.name as category',
+			db.raw("json_group_array(json_object('id', carriers.id, 'name', carriers.name)) as carriers"),
+		)
+		.from('categories')
+		.leftJoin('carriers', 'carriers.category_id', 'categories.id')
+		.whereILike('categories.name', `%${req.params.name?.trim()}%`)
+		.groupBy('categories.id', 'categories.name')
+		.first();
 
 	res.json({
 		data: {
-			id: result[0].category_id,
-			name: result[0].category,
-			carriers: JSON.parse(result[0].carriers),
+			id: result.category_id,
+			name: result.category,
+			carriers: JSON.parse(result.carriers),
 		},
 	});
 }
@@ -164,7 +142,5 @@ export async function getAPICarriersNameHandler(req: Request, res: Response) {
 
 // GET /api/emails
 export async function getAPIEmailsHandler(req: Request, res: Response) {
-	res.json({
-		data: await db.select('email').from('carrier_emails'),
-	});
+	res.json({ data: await db.select('id', 'email').from('carrier_emails') });
 }
