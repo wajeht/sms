@@ -82,7 +82,23 @@ export async function getAPICategoriesHandler(req: Request, res: Response) {
 
 // GET /api/categories/:name
 export async function getAPICategoriesNameHandler(req: Request, res: Response) {
-	res.json({ message: 'ok' });
+	const category = await db
+		.select('id', 'name')
+		.from('categories')
+		.where('name', 'like', `%${req.params.name?.trim()}%`)
+		.first();
+
+	const carriers = await db
+		.select('id', 'name')
+		.from('carriers')
+		.where({ category_id: category.id });
+
+	res.json({
+		data: {
+			...category,
+			carriers,
+		},
+	});
 }
 
 // GET /api/carriers
