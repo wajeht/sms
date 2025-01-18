@@ -5,13 +5,184 @@
   </div>
 </div>
 
-<div class="p-10">
-  <div class="mx-auto max-w-5xl w-full">
-    <p>For questions or support, contact us via email at
-      <a href="mailto:mail@jaw.dev" class="hover:underline transition-colors duration-300 ease-out">mail@jaw.dev</a>
-      or report an issue on
-      <a href="https://github.com/wajeht/sms" class="hover:underline transition-colors duration-300 ease-out"
-        target="_blank" rel="noopener noreferrer">GitHub</a>.
-    </p>
+<div class="p-10 bg-[#191919] text-[#d3d3d3]">
+  <div class="mx-auto max-w-5xl w-full space-y-12">
+    <div>
+      <p class="mb-5">For questions or support, contact us via email at
+        <a href="mailto:mail@jaw.dev" class="text-[#8a8a8a] hover:text-[#d3d3d3] transition-colors duration-300 ease-out">mail@jaw.dev</a>
+        or report an issue on
+        <a href="https://github.com/wajeht/sms" class="text-[#8a8a8a] hover:text-[#d3d3d3] transition-colors duration-300 ease-out"
+          target="_blank" rel="noopener noreferrer">GitHub</a>.
+      </p>
+    </div>
+
+    <!-- API Endpoints Table -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-[#191919] rounded-lg overflow-hidden border border-[#222222]">
+        <thead class="bg-[#191919] border-b border-[#222222]">
+          <tr>
+            <th class="px-6 py-3 text-left font-medium text-[#8a8a8a] uppercase tracking-wider">Method</th>
+            <th class="px-6 py-3 text-left font-medium text-[#8a8a8a] uppercase tracking-wider">Endpoint</th>
+            <th class="px-6 py-3 text-left font-medium text-[#8a8a8a] uppercase tracking-wider">Description</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#222222]">
+          <tr class="hover:bg-neutral-800 transition-colors duration-200">
+            <td class="px-6 py-4 whitespace-nowrap"><span class="text-[#d3d3d3]">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/categories</td>
+            <td class="px-6 py-4 ">Get all categories with their carriers</td>
+          </tr>
+          <tr class="hover:bg-neutral-800 transition-colors duration-200">
+            <td class="px-6 py-4 whitespace-nowrap "><span class="text-[#d3d3d3]">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap ">/api/categories/:name</td>
+            <td class="px-6 py-4 ">Search categories by name</td>
+          </tr>
+          <tr class="hover:bg-neutral-800 transition-colors duration-200">
+            <td class="px-6 py-4 whitespace-nowrap "><span class="text-[#d3d3d3]">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap ">/api/carriers</td>
+            <td class="px-6 py-4 ">Get all carriers with their email domains</td>
+          </tr>
+          <tr class="hover:bg-neutral-800 transition-colors duration-200">
+            <td class="px-6 py-4 whitespace-nowrap "><span class="text-[#d3d3d3]">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap ">/api/carriers/:id</td>
+            <td class="px-6 py-4 ">Get specific carrier by ID</td>
+          </tr>
+          <tr class="hover:bg-neutral-800 transition-colors duration-200">
+            <td class="px-6 py-4 whitespace-nowrap "><span class="text-[#d3d3d3]">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap ">/api/emails</td>
+            <td class="px-6 py-4 ">Get all carrier email domains</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Categories -->
+    <div class="space-y-6">
+      <h3 class="text-2xl font-medium text-white">Categories</h3>
+
+      <div class="space-y-4">
+        <div class="border border-[#222222] rounded-lg p-6 bg-[#191919]">
+          <h4 class="text-lg font-semibold text-[#d3d3d3]">GET /api/categories</h4>
+          <p class="mt-2 text-[#8a8a8a]">Retrieve all categories with their associated carriers.</p>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Response Format:</h5>
+            <pre class="bg-neutral-800 rounded p-4 mt-2 overflow-x-auto text-[#8a8a8a]"><code>{
+  "data": [
+    {
+      "id": 1,
+      "name": "Category Name",
+      "carriers": [
+        {
+          "id": 1,
+          "name": "Carrier Name"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="border border-[#222222] rounded-lg p-6 bg-[#191919]">
+          <h4 class="text-lg font-semibold text-[#d3d3d3]">GET /api/categories/:name</h4>
+          <p class="mt-2 text-[#8a8a8a]">Search for a specific category by name (supports partial matches).</p>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Parameters:</h5>
+            <p class="mt-1 text-[#8a8a8a]"><code class="bg-neutral-800 px-2 py-1 rounded">name</code> - Category name to search for</p>
+          </div>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Response Format:</h5>
+            <pre class="bg-neutral-800 rounded p-4 mt-2 overflow-x-auto text-[#8a8a8a]"><code>{
+  "data": {
+    "id": 1,
+    "name": "Category Name",
+    "carriers": [
+      {
+        "id": 1,
+        "name": "Carrier Name"
+      }
+    ]
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carriers -->
+    <div class="space-y-6">
+      <h3 class="text-2xl font-medium text-white">Carriers</h3>
+
+      <div class="space-y-4">
+        <div class="border border-[#222222] rounded-lg p-6 bg-[#191919]">
+          <h4 class="text-lg font-semibold text-[#d3d3d3]">GET /api/carriers</h4>
+          <p class="mt-2 text-[#8a8a8a]">Retrieve all carriers with their associated email domains.</p>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Response Format:</h5>
+            <pre class="bg-neutral-800 rounded p-4 mt-2 overflow-x-auto text-[#8a8a8a]"><code>{
+  "data": [
+    {
+      "id": 1,
+      "name": "Carrier Name",
+      "emails": [
+        {
+          "id": 1,
+          "email": "sms@carrier.com"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="border border-[#222222] rounded-lg p-6 bg-[#191919]">
+          <h4 class="text-lg font-semibold text-[#d3d3d3]">GET /api/carriers/:id</h4>
+          <p class="mt-2 text-[#8a8a8a]">Retrieve a specific carrier by ID with its email domains.</p>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Parameters:</h5>
+            <p class="mt-1 text-[#8a8a8a]"><code class="bg-neutral-800 px-2 py-1 rounded">id</code> - Carrier ID</p>
+          </div>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Response Format:</h5>
+            <pre class="bg-neutral-800 rounded p-4 mt-2 overflow-x-auto text-[#8a8a8a]"><code>{
+  "data": {
+    "id": 1,
+    "name": "Carrier Name",
+    "emails": [
+      {
+        "id": 1,
+        "email": "sms@carrier.com"
+      }
+    ]
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emails -->
+    <div class="space-y-6">
+      <h3 class="text-2xl font-medium text-white">Email</h3>
+
+      <div class="space-y-4">
+        <div class="border border-[#222222] rounded-lg p-6 bg-[#191919]">
+          <h4 class="text-lg font-semibold text-[#d3d3d3]">GET /api/emails</h4>
+          <p class="mt-2 text-[#8a8a8a]">Retrieve all carrier email domains.</p>
+          <div class="mt-4">
+            <h5 class="font-medium text-[#d3d3d3]">Response Format:</h5>
+            <pre class="bg-neutral-800 rounded p-4 mt-2 overflow-x-auto text-[#8a8a8a]"><code>{
+  "data": [
+    {
+      "id": 1,
+      "email": "sms@carrier.com"
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
