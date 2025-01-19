@@ -1,9 +1,9 @@
 import helmet from 'helmet';
-import { db } from './db/db.js';
+import { db } from './db/db';
 import { logger } from './logger';
 import { csrfSync } from 'csrf-sync';
 import session from 'express-session';
-import { sessionConfig, appConfig } from './config.js';
+import { sessionConfig, appConfig } from './config';
 import { ConnectSessionKnexStore } from 'connect-session-knex';
 import { Request, Response, NextFunction as Next } from 'express';
 
