@@ -958,6 +958,10 @@ video {
   padding-left: 1.25rem !important;
 }
 
+.pr-6 {
+  padding-right: 1.5rem !important;
+}
+
 .text-left {
   text-align: left !important;
 }
