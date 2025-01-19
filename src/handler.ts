@@ -84,6 +84,13 @@ export async function getAPICategoryNameHandler(req: Request, res: Response) {
 		.groupBy('categories.id', 'categories.name')
 		.first();
 
+	if (!result) {
+		res.status(404).json({
+			message: 'Sorry, the resource you are looking for could not be found.',
+		});
+		return;
+	}
+
 	res.json({
 		data: {
 			id: result.category_id,
@@ -131,6 +138,13 @@ export async function getAPICarrierIDHandler(req: Request, res: Response) {
 		.where('carriers.id', req.params.id)
 		.groupBy('carriers.id', 'carriers.name')
 		.first();
+
+	if (!result) {
+		res.status(404).json({
+			message: 'Sorry, the resource you are looking for could not be found.',
+		});
+		return;
+	}
 
 	res.json({
 		data: {

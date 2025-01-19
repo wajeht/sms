@@ -9,7 +9,14 @@ import { Request, Response, NextFunction as Next } from 'express';
 
 export function notFoundMiddleware() {
 	return (req: Request, res: Response, _next: Next) => {
-		return res.render('error.html', {
+		if (req.path.startsWith('/api')) {
+			res.status(404).json({
+				message: 'Sorry, the resource you are looking for could not be found.',
+			});
+			return;
+		}
+
+		return res.status(404).render('error.html', {
 			title: 'Not found',
 			statusCode: 404,
 			message: 'Sorry, the page you are looking for could not be found.',
@@ -25,6 +32,14 @@ export function errorMiddleware() {
 			500,
 			err,
 		);
+
+		if (req.path.startsWith('/api')) {
+			res.status(500).json({
+				message:
+					'The server encountered an internal error or misconfiguration and was unable to complete your request',
+			});
+			return;
+		}
 		return res.render('error.html', {
 			title: 'Error',
 			statusCode: 500,
