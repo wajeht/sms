@@ -12,6 +12,7 @@ export function notFoundMiddleware() {
 		if (req.path.startsWith('/api')) {
 			res.status(404).json({
 				message: 'Sorry, the resource you are looking for could not be found.',
+				data: null,
 			});
 			return;
 		}
@@ -37,6 +38,7 @@ export function errorMiddleware() {
 			res.status(500).json({
 				message:
 					'The server encountered an internal error or misconfiguration and was unable to complete your request',
+				data: null,
 			});
 			return;
 		}

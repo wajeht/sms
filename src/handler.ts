@@ -62,6 +62,7 @@ export async function getAPICategoriesHandler(req: Request, res: Response) {
 		.orderBy('categories.name');
 
 	res.json({
+		message: 'categories retrieved successfully',
 		data: result.map((row) => ({
 			id: row.category_id,
 			name: row.category,
@@ -87,11 +88,13 @@ export async function getAPICategoryNameHandler(req: Request, res: Response) {
 	if (!result) {
 		res.status(404).json({
 			message: 'Sorry, the resource you are looking for could not be found.',
+			data: null,
 		});
 		return;
 	}
 
 	res.json({
+		message: 'category retrieved successfully',
 		data: {
 			id: result.category_id,
 			name: result.category,
@@ -116,6 +119,7 @@ export async function getAPICarriersHandler(req: Request, res: Response) {
 		.orderBy('carriers.name');
 
 	res.json({
+		message: 'carriers retrieved successfully',
 		data: result.map((row) => ({
 			...row,
 			emails: JSON.parse(row.emails),
@@ -142,11 +146,13 @@ export async function getAPICarrierIDHandler(req: Request, res: Response) {
 	if (!result) {
 		res.status(404).json({
 			message: 'Sorry, the resource you are looking for could not be found.',
+			data: null,
 		});
 		return;
 	}
 
 	res.json({
+		message: 'carrier retrieved successfully',
 		data: {
 			...result,
 			emails: JSON.parse(result.emails),
@@ -156,5 +162,8 @@ export async function getAPICarrierIDHandler(req: Request, res: Response) {
 
 // GET /api/emails
 export async function getAPIEmailsHandler(req: Request, res: Response) {
-	res.json({ data: await db.select('id', 'email').from('carrier_emails') });
+	res.json({
+		message: 'emails retrieved successfully',
+		data: await db.select('id', 'email').from('carrier_emails'),
+	});
 }
