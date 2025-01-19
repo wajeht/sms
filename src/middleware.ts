@@ -98,12 +98,20 @@ export function sessionMiddleware() {
 
 export async function appLocalStateMiddleware(req: Request, res: Response, next: Next) {
 	try {
+		const isProd = appConfig.env === 'production';
+		const randomNumber = Math.random();
+
 		res.locals.state = {
 			path: req.path,
 			user: req.user ?? req.session.user,
 			copyRightYear: new Date().getFullYear(),
 			input: req.session?.input || {},
 			errors: req.session?.errors || {},
+			version: {
+				style: isProd ? '0.15' : randomNumber,
+				script: isProd ? '0.0' : randomNumber,
+				plausible: isProd ? '0.0' : randomNumber,
+			},
 			env: appConfig.env,
 			flash: {
 				success: req.flash('success'),
@@ -113,8 +121,10 @@ export async function appLocalStateMiddleware(req: Request, res: Response, next:
 			},
 		};
 
-		delete req.session.input;
-		delete req.session.errors;
+		if (req.session) {
+			delete req.session.input;
+			delete req.session.errors;
+		}
 
 		next();
 	} catch (error) {
