@@ -25,38 +25,28 @@
         </thead>
         <tbody class="divide-y divide-neutral-200 dark:divide-[#222222]">
           <tr>
-            <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/categories</span>
-            </td>
+            <td class="pr-6 py-4 whitespace-nowrap"><span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/categories</td>
             <td class="px-6 py-4">Get all categories with their carriers</td>
           </tr>
           <tr>
-            <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/categories/:name</span>
-            </td>
+            <td class="pr-6 py-4 whitespace-nowrap"><span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/categories/:name	</td>
             <td class="px-6 py-4">Search categories by name</td>
           </tr>
           <tr>
-            <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/carriers</span>
-            </td>
+            <td class="pr-6 py-4 whitespace-nowrap"><span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/carriers</td>
             <td class="px-6 py-4">Get all carriers with their email</td>
           </tr>
           <tr>
-            <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/carriers/:id</span>
-            </td>
+            <td class="pr-6 py-4 whitespace-nowrap"><span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/carriers/:id</td>
             <td class="px-6 py-4">Get specific carrier by ID</td>
           </tr>
           <tr>
-            <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/emails</span>
-            </td>
+            <td class="pr-6 py-4 whitespace-nowrap"><span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">/api/emails</td>
             <td class="px-6 py-4">Get all carrier email</td>
           </tr>
         </tbody>
@@ -70,7 +60,10 @@
         <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
           <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
             <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
-              <h4 class="text-lg font-semibold">GET <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/categories</span></h4>
+              <h4 class="text-lg font-semibold space-x-2">
+                <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span>
+                <span>/api/categories</span>
+              </h4>
               <p class="mt-2">Retrieve all categories with their associated carriers.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
@@ -96,7 +89,10 @@
         <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
           <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
             <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
-              <h4 class="text-lg font-semibold">GET <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/categories/:name</span></h4>
+              <h4 class="text-lg font-semibold space-x-2">
+                <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span>
+                <span>/api/categories/:name</span>
+              </h4>
               <p class="mt-2">Search for a specific category by name (supports partial matches).</p>
               <div class="mt-4">
                 <h5 class="font-medium">Parameters:</h5>
@@ -132,7 +128,10 @@
         <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
           <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
             <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
-              <h4 class="text-lg font-semibold">GET  <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/carriers</span></h4>
+              <h4 class="text-lg font-semibold space-x-2">
+                <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span>
+                <span>/api/carriers</span>
+              </h4>
               <p class="mt-2">Retrieve all carriers with their associated email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
@@ -158,7 +157,10 @@
         <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
           <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
             <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
-              <h4 class="text-lg font-semibold">GET <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/carriers/:id</span></h4>
+              <h4 class="text-lg font-semibold space-x-2">
+                <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span>
+                <span>/api/carriers/:id</span>
+              </h4>
               <p class="mt-2">Retrieve a specific carrier by ID with its email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Parameters:</h5>
@@ -194,7 +196,10 @@
         <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
           <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
             <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
-              <h4 class="text-lg font-semibold">GET <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">/api/emails</span></h4>
+              <h4 class="text-lg font-semibold space-x-2">
+                <span class="dark:bg-neutral-800 bg-neutral-100 rounded px-3 py-1">GET</span>
+                <span>/api/emails</span>
+              </h4>
               <p class="mt-2">Retrieve all carrier email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
