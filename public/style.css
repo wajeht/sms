@@ -1196,9 +1196,9 @@ body {
   cursor: copy !important;
 }
 
-.hover\:bg-neutral-200:hover {
+.hover\:bg-neutral-100:hover {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1)) !important;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .hover\:bg-neutral-700:hover {

@@ -127,7 +127,7 @@
                 <ul class="pl-5">
                   <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
                     <li class="dark:text-[#8a8a8a] relative group">
-                      <span class="inline-block hover:bg-neutral-200 hover:dark:bg-neutral-800 hover:dark:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
+                      <span class="inline-block hover:bg-neutral-100 hover:dark:bg-neutral-800 hover:dark:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
                         <%= carriers.data[carriers.keys[i]][j].emails[k] %>
                       </span>
                     </li>
