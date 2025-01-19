@@ -1,6 +1,7 @@
+import { db } from './db/db';
+import { NotFoundError } from './error';
 import { Request, Response } from 'express';
 import { carrierData, updateCarrierQueue } from './util';
-import { db } from './db/db';
 
 // GET /healthz
 export function getHealthzHandler(req: Request, res: Response) {
@@ -86,11 +87,7 @@ export async function getAPICategoryNameHandler(req: Request, res: Response) {
 		.first();
 
 	if (!result) {
-		res.status(404).json({
-			message: 'Sorry, the resource you are looking for could not be found.',
-			data: null,
-		});
-		return;
+		throw new NotFoundError('Sorry, the resource you are looking for could not be found.');
 	}
 
 	res.json({
@@ -144,11 +141,7 @@ export async function getAPICarrierIDHandler(req: Request, res: Response) {
 		.first();
 
 	if (!result) {
-		res.status(404).json({
-			message: 'Sorry, the resource you are looking for could not be found.',
-			data: null,
-		});
-		return;
+		throw new NotFoundError('Sorry, the resource you are looking for could not be found.');
 	}
 
 	res.json({

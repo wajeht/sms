@@ -1,6 +1,7 @@
 import helmet from 'helmet';
 import { db } from './db/db';
 import { logger } from './logger';
+import { HttpError } from './error';
 import { csrfSync } from 'csrf-sync';
 import session from 'express-session';
 import { sessionConfig, appConfig } from './config';
@@ -27,26 +28,33 @@ export function notFoundMiddleware() {
 
 export function errorMiddleware() {
 	return (err: Error, req: Request, res: Response, _next: Next) => {
+		let statusCode = 500;
+		let message =
+			'The server encountered an internal error or misconfiguration and was unable to complete your request';
+
+		if (err instanceof HttpError) {
+			statusCode = err.statusCode;
+			message = err.message;
+		}
+
 		logger.error(
 			`[errorMiddleware] error message: %s, status: %d, full error: %o`,
 			err.message,
-			500,
+			statusCode,
 			err,
 		);
 
 		if (req.path.startsWith('/api')) {
-			res.status(500).json({
-				message:
-					'The server encountered an internal error or misconfiguration and was unable to complete your request',
+			res.status(statusCode).json({
+				message,
 				data: null,
 			});
 			return;
 		}
-		return res.render('error.html', {
+		res.status(statusCode).render('error.html', {
 			title: 'Error',
-			statusCode: 500,
-			message:
-				'The server encountered an internal error or misconfiguration and was unable to complete your request',
+			statusCode,
+			message,
 		});
 	};
 }
