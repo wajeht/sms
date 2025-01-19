@@ -16,9 +16,9 @@ export async function getHomepageHandler(req: Request, res: Response) {
 	});
 }
 
-// GET /lookup
-export async function getLookupPageHandler(req: Request, res: Response) {
-	return res.render('lookup.html', { title: 'Lookup' });
+// GET /phone
+export async function getPhonePageHandler(req: Request, res: Response) {
+	return res.render('phone.html', { title: 'Phone' });
 }
 
 // GET /update
