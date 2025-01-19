@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" class="dark">
 
 	<%- include('../components/head.html') %>
 
-	<body id="app" class="flex min-h-screen flex-col overflow-auto max-w-full" v-cloak>
+	<body id="app" class="flex min-h-screen flex-col bg-white text-[#121d28] dark:bg-[#191919] dark:text-[#d3d3d3] overflow-auto max-w-full transition duration-300 ease-in-out" v-cloak>
 		<!-- scroll to top -->
 		<%- include('../components/scroll-to-top.html') %>
 
@@ -11,7 +11,7 @@
 		<%- include('../components/header.html') %>
 
 		<!-- main -->
-		<main class="flex-1 relative h-full bg-[#191919] text-[#d3d3d3]"><%- body %></main>
+		<main class="flex-1 relative h-full"><%- body %></main>
 
 		<!-- footer -->
 		<%- include('../components/footer.html') %>

@@ -25,6 +25,14 @@
   <!-- SEO -->
 	<link rel="canonical" href="https://bang.jaw.dev/">
 
+	<script>
+		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  		document.documentElement.classList.add('dark');
+		} else {
+  		document.documentElement.classList.remove('dark');
+		}
+	</script>
+
 	<!-- Styles and Scripts -->
   <link rel="stylesheet" href="/style.css?v=<%- state.version.style %>">
 	<script defer data-domain="sms.jaw.dev" src="https://plausible.jaw.dev/js/script.js?v=<%- state.version.plausible %>"></script>

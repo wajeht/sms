@@ -14,11 +14,11 @@
         if (link) { // Ensure the link exists
           if (rect.top <= 150 && rect.bottom > 0) {
             // Section is active
-            link.classList.add('bg-neutral-800', 'font-extrabold', 'shadow-md');
+            link.classList.add('bg-neutral-800', 'font-extrabold', 'shadow-md', 'text-white');
             lastActiveLink = link;
           } else {
             // Remove highlight only if fully scrolled past
-            link.classList.remove('bg-neutral-800', 'font-extrabold', 'shadow-md');
+            link.classList.remove('bg-neutral-800', 'font-extrabold', 'shadow-md', 'text-white');
           }
         }
       });
@@ -27,7 +27,7 @@
       if (lastActiveLink) {
         navLinks.forEach((link) => {
           if (link !== lastActiveLink) {
-            link.classList.remove('bg-neutral-800', 'font-extrabold', 'shadow-md');
+            link.classList.remove('bg-neutral-800', 'font-extrabold', 'shadow-md', 'text-white');
           }
         });
       }
@@ -78,9 +78,9 @@
 <div class="p-10">
   <div class="mx-auto max-w-5xl w-full">
     <p class="mb-5">These addresses are pretty simple—they’re usually a 10-digit phone number followed by your mobile carrier’s domain name, like this:</p>
-    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded shadow-md">1234567890@carrierdomainname.com</p>
+    <p class="mb-5 p-3 w-fit dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md">1234567890@carrierdomainname.com</p>
     <p class="mb-5">You probably already know the phone number part, but if you’re missing the domain name, don’t worry—we’ve got a list of common ones below.</p>
-    <p class="mb-5 p-3 w-fit bg-neutral-800 rounded shadow-md">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
+    <p class="mb-5 p-3 w-fit dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
     <p class="mb-5">Carriers are listed in alphabetical order, so just click on a letter to jump to the one you need.</p>
     <% if (carriers.keys.length) { %>
       <p class="italic break-all text-sm">Last updated on <%= lastUpdatedDate %></p>
@@ -89,10 +89,10 @@
 </div>
 
 <% if (carriers.keys.length) { %>
-  <div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] sticky top-0 z-20">
+  <div class="mx-auto max-w-5xl w-full py-10 bg-white dark:bg-[#191919] sticky top-0 z-20">
     <div class="absolute inset-x-0 top-0 h-[2px]">
-      <div class="h-1/2 bg-[#101010]"></div>
-      <div class="h-1/2 bg-[#222222]"></div>
+      <div class="h-1/2 bg-neutral-200 dark:bg-[#101010]"></div>
+      <div class="h-1/2 hidden dark:block bg-[#222222]"></div>
     </div>
 
     <div class="px-10 lg:px-0 mx-auto max-w-5xl w-full flex gap-1 lg:justify-between flex-wrap">
@@ -104,30 +104,30 @@
 <% } %>
 
 <% if (carriers.keys.length) { %>
-  <div class="mx-auto max-w-5xl w-full py-10 bg-[#191919] relative">
+  <div class="mx-auto max-w-5xl w-full py-10 dark:bg-[#191919] relative">
     <div class="absolute inset-x-0 top-0 h-[2px]">
-      <div class="h-1/2 bg-[#101010]"></div>
-      <div class="h-1/2 bg-[#222222]"></div>
+      <div class="h-1/2 bg-neutral-200 dark:bg-[#101010]"></div>
+      <div class="h-1/2 hidden dark:block bg-[#222222]"></div>
     </div>
 
     <div class="mx-auto max-w-5xl w-full flex flex-col gap-5">
       <% for (let i= 0; i < carriers.keys.length; i++) { %>
         <div id="<%= carriers.keys[i] %>">
-          <div class="mb-5 sticky top-[110px] z-10 bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
+          <div class="mb-5 sticky top-[110px] z-10 bg-white dark:bg-[#191919] flex flex-col gap-5 scroll-mt-[500px]">
             <h3 class="text-2xl font-medium px-10 lg:px-0"><%= carriers.keys[i] %></h3>
             <div aria-hidden="true">
-              <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-[#101010]"></div>
-              <div class="-bottom-[20px] left-0 w-full border-b-[1px] border-[#222222]"></div>
+              <div class="-bottom-[19px] left-0 w-full border-b-[1px] border-neutral-200 dark:border-[#101010]"></div>
+              <div class="-bottom-[20px] left-0 w-full border-b-[1px] hidden dark:block border-[#222222]"></div>
             </div>
           </div>
           <% if (carriers.data[carriers.keys[i]] && carriers.data[carriers.keys[i]].length > 0) { %>
             <% for (let j= 0; j < carriers.data[carriers.keys[i]].length; j++) { %>
               <div class="mb-5 px-10 lg:px-0">
-                <p class="text-lg font-semibold hover:text-[#d3d3d3] transition-colors duration-200"><%= carriers.data[carriers.keys[i]][j].name %></p>
+                <p class="text-lg font-semibold hover:dark:text-[#d3d3d3] transition-colors duration-200"><%= carriers.data[carriers.keys[i]][j].name %></p>
                 <ul class="pl-5">
                   <% for (let k= 0; k < carriers.data[carriers.keys[i]][j].emails.length; k++) { %>
-                    <li class="text-[#8a8a8a] relative group">
-                      <span class="inline-block hover:bg-neutral-800 hover:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
+                    <li class="dark:text-[#8a8a8a] relative group">
+                      <span class="inline-block hover:bg-neutral-200 hover:dark:bg-neutral-800 hover:dark:text-[#d3d3d3] transition-all duration-200 rounded hover:px-2 hover:py-[2px] hover:cursor-copy hover:-mx-2 hover:-my-[2px]" onclick="copyToClipboard('<%= carriers.data[carriers.keys[i]][j].emails[k] %>')">
                         <%= carriers.data[carriers.keys[i]][j].emails[k] %>
                       </span>
                     </li>

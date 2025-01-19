@@ -652,6 +652,10 @@ video {
   margin-top: 1rem !important;
 }
 
+.block {
+  display: block !important;
+}
+
 .inline-block {
   display: inline-block !important;
 }
@@ -787,9 +791,9 @@ video {
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse)) !important;
 }
 
-.divide-\[\#222222\] > :not([hidden]) ~ :not([hidden]) {
+.divide-neutral-200 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1 !important;
-  border-color: rgb(34 34 34 / var(--tw-divide-opacity, 1)) !important;
+  border-color: rgb(229 229 229 / var(--tw-divide-opacity, 1)) !important;
 }
 
 .overflow-auto {
@@ -853,24 +857,19 @@ video {
   border-top-width: 1px !important;
 }
 
-.border-\[\#101010\] {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
-}
-
 .border-\[\#222222\] {
   --tw-border-opacity: 1 !important;
   border-color: rgb(34 34 34 / var(--tw-border-opacity, 1)) !important;
 }
 
-.border-t-\[\#101010\] {
+.border-neutral-200 {
   --tw-border-opacity: 1 !important;
-  border-top-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
+  border-color: rgb(229 229 229 / var(--tw-border-opacity, 1)) !important;
 }
 
-.bg-\[\#101010\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(16 16 16 / var(--tw-bg-opacity, 1)) !important;
+.border-t-neutral-200 {
+  --tw-border-opacity: 1 !important;
+  border-top-color: rgb(229 229 229 / var(--tw-border-opacity, 1)) !important;
 }
 
 .bg-\[\#121d28\] {
@@ -888,9 +887,19 @@ video {
   background-color: rgb(34 34 34 / var(--tw-bg-opacity, 1)) !important;
 }
 
+.bg-neutral-200 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1)) !important;
+}
+
 .bg-neutral-800 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .bg-gradient-to-r {
@@ -1039,9 +1048,9 @@ video {
   letter-spacing: 0.05em !important;
 }
 
-.text-\[\#4c4c4c\] {
+.text-\[\#121d28\] {
   --tw-text-opacity: 1 !important;
-  color: rgb(76 76 76 / var(--tw-text-opacity, 1)) !important;
+  color: rgb(18 29 40 / var(--tw-text-opacity, 1)) !important;
 }
 
 .text-\[\#8a8a8a\] {
@@ -1089,6 +1098,14 @@ video {
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity, 1)) !important;
 }
 
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+
 .transition-all {
   transition-property: all !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -1127,14 +1144,11 @@ html {
 
 * {
   -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 *::-webkit-scrollbar {
   display: none;
-  /* Safari and Chrome */
 }
 
 ::-webkit-scrollbar {
@@ -1142,7 +1156,6 @@ html {
 }
 
 body {
-  background-color: #191919;
   font-family:
 		Segoe UI,
 		system-ui,
@@ -1173,6 +1186,11 @@ body {
   cursor: copy !important;
 }
 
+.hover\:bg-neutral-200:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1)) !important;
+}
+
 .hover\:bg-neutral-700:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(64 64 64 / var(--tw-bg-opacity, 1)) !important;
@@ -1191,11 +1209,6 @@ body {
 .hover\:py-\[2px\]:hover {
   padding-top: 2px !important;
   padding-bottom: 2px !important;
-}
-
-.hover\:text-\[\#d3d3d3\]:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
 }
 
 .hover\:text-white:hover {
@@ -1230,4 +1243,88 @@ body {
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+}
+
+.dark\:block:where(.dark, .dark *) {
+  display: block !important;
+}
+
+.dark\:hidden:where(.dark, .dark *) {
+  display: none !important;
+}
+
+.dark\:divide-\[\#222222\]:where(.dark, .dark *) > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1 !important;
+  border-color: rgb(34 34 34 / var(--tw-divide-opacity, 1)) !important;
+}
+
+.dark\:border-\[\#101010\]:where(.dark, .dark *) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
+}
+
+.dark\:border-\[\#222222\]:where(.dark, .dark *) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(34 34 34 / var(--tw-border-opacity, 1)) !important;
+}
+
+.dark\:border-t-\[\#101010\]:where(.dark, .dark *) {
+  --tw-border-opacity: 1 !important;
+  border-top-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
+}
+
+.dark\:bg-\[\#101010\]:where(.dark, .dark *) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(16 16 16 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.dark\:bg-\[\#191919\]:where(.dark, .dark *) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(25 25 25 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.dark\:bg-\[\#222222\]:where(.dark, .dark *) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(34 34 34 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.dark\:bg-neutral-800:where(.dark, .dark *) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.dark\:text-\[\#4c4c4c\]:where(.dark, .dark *) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(76 76 76 / var(--tw-text-opacity, 1)) !important;
+}
+
+.dark\:text-\[\#8a8a8a\]:where(.dark, .dark *) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(138 138 138 / var(--tw-text-opacity, 1)) !important;
+}
+
+.dark\:text-\[\#d3d3d3\]:where(.dark, .dark *) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
+}
+
+.dark\:shadow-md:where(.dark, .dark *) {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+.hover\:dark\:bg-neutral-800:where(.dark, .dark *):hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.hover\:dark\:text-\[\#d3d3d3\]:where(.dark, .dark *):hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(211 211 211 / var(--tw-text-opacity, 1)) !important;
+}
+
+.hover\:dark\:text-white:where(.dark, .dark *):hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
 }

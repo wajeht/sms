@@ -15,15 +15,15 @@
 
     <!-- API Endpoints Table -->
     <div class="overflow-x-auto mb-5">
-      <table class="min-w-full rounded-lg overflow-hidden border border-[#222222]">
-        <thead class="border-b border-[#222222]">
+      <table class="min-w-full rounded-lg overflow-hidden border border-neutral-200 dark:border-[#222222]">
+        <thead class="border-b border-neutral-200 dark:border-[#222222]">
           <tr>
             <th class="pr-6 py-3 text-left font-semibold uppercase tracking-wider">Method</th>
             <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Endpoint</th>
             <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Description</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-[#222222]">
+        <tbody class="divide-y divide-neutral-200 dark:divide-[#222222]">
           <tr>
             <td class="pr-6 py-4 whitespace-nowrap"><span>GET</span></td>
             <td class="px-6 py-4 whitespace-nowrap">/api/categories</td>
@@ -57,14 +57,14 @@
     <div class="space-y-6 mb-5">
       <h3 class="text-2xl font-medium">Categories</h3>
       <div class="space-y-4">
-        <div class="bg-[#101010] rounded-lg p-[1px]">
-          <div class="bg-[#222222] rounded-lg p-[1px]">
-            <div class="bg-[#191919] rounded-lg p-6">
+        <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
+          <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
+            <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
               <h4 class="text-lg font-semibold">GET /api/categories</h4>
               <p class="mt-2">Retrieve all categories with their associated carriers.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
-                <pre class="bg-neutral-800 rounded shadow-md p-4 mt-2 overflow-x-auto">{
+                <pre class="dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md p-4 mt-2 overflow-x-auto">{
   "data": [
     {
       "id": 1,
@@ -83,20 +83,20 @@
           </div>
         </div>
 
-        <div class="bg-[#101010] rounded-lg p-[1px]">
-          <div class="bg-[#222222] rounded-lg p-[1px]">
-            <div class="bg-[#191919] rounded-lg p-6">
+        <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
+          <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
+            <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
               <h4 class="text-lg font-semibold">GET /api/categories/:name</h4>
               <p class="mt-2">Search for a specific category by name (supports partial matches).</p>
               <div class="mt-4">
                 <h5 class="font-medium">Parameters:</h5>
                 <p class="mt-1">
-                  <code class="bg-neutral-800 px-2 py-1 rounded">name</code> - Category name to search for
+                  <code class="dark:bg-neutral-800 bg-neutral-200 px-2 py-1 rounded">name</code> - Category name to search for
                 </p>
               </div>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
-                <pre class="bg-neutral-800 rounded shadow-md p-4 mt-2 overflow-x-auto">{
+                <pre class="dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md p-4 mt-2 overflow-x-auto">{
   "data": {
     "id": 1,
     "name": "Category Name",
@@ -119,14 +119,14 @@
     <div class="space-y-6 mb-5">
       <h3 class="text-2xl font-medium">Carriers</h3>
       <div class="space-y-4">
-        <div class="bg-[#101010] rounded-lg p-[1px]">
-          <div class="bg-[#222222] rounded-lg p-[1px]">
-            <div class="bg-[#191919] rounded-lg p-6">
+        <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
+          <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
+            <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
               <h4 class="text-lg font-semibold">GET /api/carriers</h4>
               <p class="mt-2">Retrieve all carriers with their associated email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
-                <pre class="bg-neutral-800 rounded shadow-md p-4 mt-2 overflow-x-auto">{
+                <pre class="dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md p-4 mt-2 overflow-x-auto">{
   "data": [
     {
       "id": 1,
@@ -145,20 +145,20 @@
           </div>
         </div>
 
-        <div class="bg-[#101010] rounded-lg p-[1px]">
-          <div class="bg-[#222222] rounded-lg p-[1px]">
-            <div class="bg-[#191919] rounded-lg p-6">
+        <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
+          <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
+            <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
               <h4 class="text-lg font-semibold">GET /api/carriers/:id</h4>
               <p class="mt-2">Retrieve a specific carrier by ID with its email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Parameters:</h5>
                 <p class="mt-1">
-                  <code class="bg-neutral-800 px-2 py-1 rounded">id</code> - Carrier ID
+                  <code class="dark:bg-neutral-800 bg-neutral-200 px-2 py-1 rounded">id</code> - Carrier ID
                 </p>
               </div>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
-                <pre class="bg-neutral-800 rounded shadow-md p-4 mt-2 overflow-x-auto">{
+                <pre class="dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md p-4 mt-2 overflow-x-auto">{
   "data": {
     "id": 1,
     "name": "Carrier Name",
@@ -181,14 +181,14 @@
     <div class="space-y-6">
       <h3 class="text-2xl font-medium">Email</h3>
       <div class="space-y-4">
-        <div class="bg-[#101010] rounded-lg p-[1px]">
-          <div class="bg-[#222222] rounded-lg p-[1px]">
-            <div class="bg-[#191919] rounded-lg p-6">
+        <div class="dark:bg-[#101010] bg-neutral-200 rounded-lg p-[1px]">
+          <div class="dark:bg-[#222222] bg-white rounded-lg p-[1px]">
+            <div class="dark:bg-[#191919] bg-white rounded-lg p-6">
               <h4 class="text-lg font-semibold">GET /api/emails</h4>
               <p class="mt-2">Retrieve all carrier email.</p>
               <div class="mt-4">
                 <h5 class="font-medium">Response Format:</h5>
-                <pre class="bg-neutral-800 rounded shadow-md p-4 mt-2 overflow-x-auto">{
+                <pre class="dark:bg-neutral-800 bg-neutral-200 rounded dark:shadow-md p-4 mt-2 overflow-x-auto">{
   "data": [
     {
       "id": 1,
