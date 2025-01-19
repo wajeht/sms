@@ -104,6 +104,7 @@ export async function appLocalStateMiddleware(req: Request, res: Response, next:
 			copyRightYear: new Date().getFullYear(),
 			input: req.session?.input || {},
 			errors: req.session?.errors || {},
+			env: appConfig.env,
 			flash: {
 				success: req.flash('success'),
 				error: req.flash('error'),

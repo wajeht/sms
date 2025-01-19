@@ -49,7 +49,13 @@ app.use(expressLayouts);
 
 app.use(appLocalStateMiddleware);
 
-reload({ app, watch: [{ path: './src/views', extensions: ['.html'] }] });
+reload({
+	app,
+	watch: [
+		{ path: './src/views', extensions: ['.html'] },
+		{ path: './public', extensions: ['.js'] },
+	],
+});
 
 app.use(router);
 

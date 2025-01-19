@@ -49,7 +49,7 @@ export function reload({
 	options = {},
 }: {
 	app: Application;
-	watch: { path: string; extensions: string[] }[];
+	watch: { path: string; extensions?: string[] }[];
 	options?: { pollInterval?: number; quiet?: boolean };
 }): void {
 	if (appConfig.env !== 'development') return;
@@ -59,12 +59,27 @@ export function reload({
 	let changeDetected = false;
 	const lastContents = new Map<string, string>();
 
-	watch.forEach(({ path: dir, extensions }) => {
-		const extensionsSet = new Set(extensions);
-		fs.watch(dir, { recursive: true }, (_: fs.WatchEventType, filename: string | null) => {
-			if (filename && extensionsSet.has(filename.slice(filename.lastIndexOf('.')))) {
+	watch.forEach(({ path: watchPath, extensions }) => {
+		const isDirectory = fs.statSync(watchPath).isDirectory();
+
+		if (isDirectory && !extensions) {
+			throw new Error(`Extensions must be provided for directory: ${watchPath}`);
+		}
+
+		fs.watch(
+			watchPath,
+			{ recursive: isDirectory },
+			(_: fs.WatchEventType, filename: string | null) => {
+				if (!filename) return;
+
+				const fullPath = isDirectory ? path.join(watchPath, filename) : watchPath;
+
+				// Only check extensions for directories
+				if (isDirectory && extensions && !extensions.some((ext) => filename.endsWith(ext))) {
+					return;
+				}
+
 				try {
-					const fullPath = path.join(dir, filename);
 					const content = fs.readFileSync(fullPath, 'utf8');
 
 					if (content !== lastContents.get(fullPath)) {
@@ -76,8 +91,8 @@ export function reload({
 				} catch {
 					if (!quiet) logger.debug('[reload] Error reading file: %s', filename);
 				}
-			}
-		});
+			},
+		);
 	});
 
 	app.get('/wait-for-reload', (req: Request, res: Response) => {
