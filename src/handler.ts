@@ -16,6 +16,11 @@ export async function getHomepageHandler(req: Request, res: Response) {
 	});
 }
 
+// GET /lookup
+export async function getLookupPageHandler(req: Request, res: Response) {
+	return res.render('lookup.html', { title: 'Lookup' });
+}
+
 // GET /update
 export async function getUpdateHandler(req: Request, res: Response) {
 	updateCarrierQueue.push({});
