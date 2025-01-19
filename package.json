@@ -46,7 +46,7 @@
 	"engines": {
 		"node": ">=22.3.0"
 	},
-	"description": "find sms mail address of a phone number",
+	"description": "find carrier email addresses for phone numbers",
 	"dependencies": {
 		"axios": "^1.7.9",
 		"better-sqlite3": "^11.7.2",
