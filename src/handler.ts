@@ -71,7 +71,7 @@ export async function getAPICategoriesHandler(req: Request, res: Response) {
 }
 
 // GET /api/categories/:name
-export async function getAPICategoriesNameHandler(req: Request, res: Response) {
+export async function getAPICategoryNameHandler(req: Request, res: Response) {
 	const result = await db
 		.select(
 			'categories.id as category_id',
@@ -117,7 +117,7 @@ export async function getAPICarriersHandler(req: Request, res: Response) {
 }
 
 // GET /api/carriers/:id
-export async function getAPICarriersNameHandler(req: Request, res: Response) {
+export async function getAPICarrierIDHandler(req: Request, res: Response) {
 	const result = await db
 		.select(
 			'carriers.id',

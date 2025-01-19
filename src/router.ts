@@ -7,10 +7,10 @@ import {
 	getPrivacyPolicyPageHandler,
 	getTermsOfServicePageHandler,
 	getAPICategoriesHandler,
-	getAPICategoriesNameHandler,
 	getAPICarriersHandler,
-	getAPICarriersNameHandler,
 	getAPIEmailsHandler,
+	getAPICategoryNameHandler,
+	getAPICarrierIDHandler,
 } from './handler';
 
 const router = express.Router();
@@ -29,11 +29,11 @@ router.get('/api', getAPIPageHandler);
 
 router.get('/api/categories', getAPICategoriesHandler);
 
-router.get('/api/categories/:name', getAPICategoriesNameHandler);
+router.get('/api/categories/:name', getAPICategoryNameHandler);
 
 router.get('/api/carriers', getAPICarriersHandler);
 
-router.get('/api/carriers/:id', getAPICarriersNameHandler);
+router.get('/api/carriers/:id', getAPICarrierIDHandler);
 
 router.get('/api/emails', getAPIEmailsHandler);
 
