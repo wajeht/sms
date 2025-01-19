@@ -108,7 +108,7 @@ export async function appLocalStateMiddleware(req: Request, res: Response, next:
 			input: req.session?.input || {},
 			errors: req.session?.errors || {},
 			version: {
-				style: isProd ? '0.16' : randomNumber,
+				style: isProd ? '0.17' : randomNumber,
 				script: isProd ? '0.0' : randomNumber,
 				plausible: isProd ? '0.0' : randomNumber,
 			},

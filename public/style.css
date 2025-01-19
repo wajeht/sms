@@ -868,10 +868,6 @@ video {
   border-top-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
 }
 
-.bg-\[\#\#11919\] {
-  background-color: ##11919 !important;
-}
-
 .bg-\[\#101010\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(16 16 16 / var(--tw-bg-opacity, 1)) !important;
