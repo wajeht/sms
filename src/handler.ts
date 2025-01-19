@@ -80,7 +80,7 @@ export async function getAPICategoryNameHandler(req: Request, res: Response) {
 		)
 		.from('categories')
 		.leftJoin('carriers', 'carriers.category_id', 'categories.id')
-		.whereILike('categories.name', `%${req.params.name?.trim()}%`)
+		.whereLike('categories.name', `%${req.params.name?.trim()}%`)
 		.groupBy('categories.id', 'categories.name')
 		.first();
 
