@@ -182,7 +182,7 @@ export function extractCarrierDataFromSourceTwo(html: string): CarrierData {
 
 				data[carrierKey].push({
 					name: carrierName,
-					emails: emailList,
+					emails: emailList.filter((email) => email.includes('@')),
 				});
 			}
 		});
