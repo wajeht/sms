@@ -664,10 +664,6 @@ video {
   display: flex !important;
 }
 
-.table {
-  display: table !important;
-}
-
 .hidden {
   display: none !important;
 }
@@ -703,10 +699,6 @@ video {
 
 .w-full {
   width: 100% !important;
-}
-
-.min-w-full {
-  min-width: 100% !important;
 }
 
 .max-w-5xl {
@@ -777,12 +769,6 @@ video {
   gap: 1.75rem !important;
 }
 
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0 !important;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse)) !important;
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse))) !important;
-}
-
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0 !important;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse))) !important;
@@ -795,31 +781,12 @@ video {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse)) !important;
 }
 
-.divide-y > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-y-reverse: 0 !important;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse))) !important;
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse)) !important;
-}
-
-.divide-neutral-200 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1 !important;
-  border-color: rgb(229 229 229 / var(--tw-divide-opacity, 1)) !important;
-}
-
 .overflow-auto {
   overflow: auto !important;
 }
 
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
 .overflow-x-auto {
   overflow-x: auto !important;
-}
-
-.whitespace-nowrap {
-  white-space: nowrap !important;
 }
 
 .break-all {
@@ -849,10 +816,6 @@ video {
 .border-x-0 {
   border-left-width: 0px !important;
   border-right-width: 0px !important;
-}
-
-.border-b {
-  border-bottom-width: 1px !important;
 }
 
 .border-b-0 {
@@ -974,11 +937,6 @@ video {
   padding-right: 0.75rem !important;
 }
 
-.px-6 {
-  padding-left: 1.5rem !important;
-  padding-right: 1.5rem !important;
-}
-
 .py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
@@ -987,16 +945,6 @@ video {
 .py-10 {
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
-}
-
-.py-3 {
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
-}
-
-.py-4 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
 }
 
 .py-7 {
@@ -1010,14 +958,6 @@ video {
 
 .pl-5 {
   padding-left: 1.25rem !important;
-}
-
-.pr-6 {
-  padding-right: 1.5rem !important;
-}
-
-.text-left {
-  text-align: left !important;
 }
 
 .text-2xl {
@@ -1056,16 +996,8 @@ video {
   font-weight: 600 !important;
 }
 
-.uppercase {
-  text-transform: uppercase !important;
-}
-
 .italic {
   font-style: italic !important;
-}
-
-.tracking-wider {
-  letter-spacing: 0.05em !important;
 }
 
 .text-\[\#121d28\] {
@@ -1244,6 +1176,16 @@ body {
   opacity: 1 !important;
 }
 
+@media (min-width: 640px) {
+  .sm\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .sm\:items-center {
+    align-items: center !important;
+  }
+}
+
 @media (min-width: 768px) {
   .md\:inline {
     display: inline !important;
@@ -1273,19 +1215,9 @@ body {
   display: none !important;
 }
 
-.dark\:divide-\[\#222222\]:where(.dark, .dark *) > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1 !important;
-  border-color: rgb(34 34 34 / var(--tw-divide-opacity, 1)) !important;
-}
-
 .dark\:border-\[\#101010\]:where(.dark, .dark *) {
   --tw-border-opacity: 1 !important;
   border-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
-}
-
-.dark\:border-\[\#222222\]:where(.dark, .dark *) {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(34 34 34 / var(--tw-border-opacity, 1)) !important;
 }
 
 .dark\:border-t-\[\#101010\]:where(.dark, .dark *) {
