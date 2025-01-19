@@ -14,7 +14,7 @@
 
 	<!-- Preload and Preconnect -->
 	<link rel="preload" href="/style.css?v=<%- state.version.style %>" as="style">
-	<link rel="preconnect" href="https://plausible.jaw.dev">
+	<link rel="preconnect" href="https://plausible.jaw.dev?v=<%- state.version.plausible %>">
 
   	<!-- Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -23,7 +23,7 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <!-- SEO -->
-	<link rel="canonical" href="https://bang.jaw.dev/">
+	<link rel="canonical" href="https://sms.jaw.dev/">
 
 	<script>
 		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
