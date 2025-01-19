@@ -623,6 +623,10 @@ video {
   z-index: 20 !important;
 }
 
+.z-30 {
+  z-index: 30 !important;
+}
+
 .m-0 {
   margin: 0px !important;
 }
@@ -862,6 +866,10 @@ video {
 .border-t-\[\#101010\] {
   --tw-border-opacity: 1 !important;
   border-top-color: rgb(16 16 16 / var(--tw-border-opacity, 1)) !important;
+}
+
+.bg-\[\#\#11919\] {
+  background-color: ##11919 !important;
 }
 
 .bg-\[\#101010\] {
