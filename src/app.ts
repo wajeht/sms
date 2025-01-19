@@ -51,10 +51,7 @@ app.use(appLocalStateMiddleware);
 
 reload({
 	app,
-	watch: [
-		{ path: './src/views', extensions: ['.html'] },
-		{ path: './public', extensions: ['.js'] },
-	],
+	watch: [{ path: './public/script.js' }, { path: './src/views', extensions: ['.html'] }],
 });
 
 app.use(router);
