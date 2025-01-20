@@ -158,6 +158,7 @@ export async function getCarrierWebsiteHTML(url: string) {
 	}
 }
 
+// TODO: improve performance
 export function extractCarrierDataFromSourceTwo(html: string): CarrierData {
 	try {
 		const document = new JSDOM(html).window.document;
@@ -247,6 +248,7 @@ export function extractCarrierDataFromSourceOne(html: string): CarrierData {
 	}
 }
 
+// TODO: improve performance
 export function extractCarrierDataFromSourceThree(
 	data: {
 		carrier: string;
@@ -289,6 +291,7 @@ export function extractCarrierDataFromSourceThree(
 	}
 }
 
+// TODO: improve performance
 async function combineCarrierDataFromSources(): Promise<CarrierData> {
 	const data: CarrierData = {};
 
@@ -375,6 +378,7 @@ async function combineCarrierDataFromSources(): Promise<CarrierData> {
 	}
 }
 
+// TODO: improve performance
 export async function updateCarrier() {
 	try {
 		logger.info(`[updateCarrier] Updating carrier operation started`);
@@ -440,22 +444,19 @@ export async function updateCarrier() {
 	}
 }
 
+// TODO: improve performance
 export async function carrierData() {
 	try {
-		const results: { category: string; name: string; email: string }[] = await db.raw(`
-		SELECT
-			cat.name AS category,
-			c.name AS name,
-			ce.email
-		FROM
-			carriers AS c
-		JOIN
-			carrier_emails AS ce ON c.id = ce.carrier_id
-		JOIN
-			categories AS cat ON c.category_id = cat.id
-		ORDER BY
-			cat.name, c.name
-	`);
+		const results: { category: string; name: string; email: string }[] = await db
+			.select({
+				category: 'cat.name',
+				name: 'c.name',
+				email: 'ce.email',
+			})
+			.from('carriers as c')
+			.join('carrier_emails as ce', 'c.id', 'ce.carrier_id')
+			.join('categories as cat', 'c.category_id', 'cat.id')
+			.orderBy(['cat.name', 'c.name']);
 
 		// Transform results into the desired structure
 		const carriersData: { [key: string]: { name: string; emails: string[] }[] } = {};
