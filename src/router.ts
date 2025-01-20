@@ -12,6 +12,7 @@ import {
 	getAPICategoryNameHandler,
 	getAPICarrierIDHandler,
 	getPhonePageHandler,
+	postPhonePageHandler,
 } from './handler';
 
 const router = express.Router();
@@ -26,7 +27,11 @@ router.get('/privacy-policy', getPrivacyPolicyPageHandler);
 
 router.get('/terms-of-service', getTermsOfServicePageHandler);
 
-router.get('/phone', getPhonePageHandler);
+router.get('/phone/', getPhonePageHandler);
+
+router.get('/phone/:number', getPhonePageHandler);
+
+router.post('/phone', postPhonePageHandler);
 
 router.get('/api', getAPIPageHandler);
 

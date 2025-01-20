@@ -709,6 +709,10 @@ video {
   max-width: 100% !important;
 }
 
+.max-w-lg {
+  max-width: 32rem !important;
+}
+
 .flex-1 {
   flex: 1 1 0% !important;
 }
@@ -811,6 +815,10 @@ video {
 
 .border-2 {
   border-width: 2px !important;
+}
+
+.border-\[1px\] {
+  border-width: 1px !important;
 }
 
 .border-x-0 {
@@ -937,6 +945,11 @@ video {
   padding-right: 0.75rem !important;
 }
 
+.px-6 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
 .py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
@@ -945,6 +958,11 @@ video {
 .py-10 {
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
+}
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
 .py-7 {
@@ -1044,6 +1062,17 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+.outline-none {
+  outline: 2px solid transparent !important;
+  outline-offset: 2px !important;
+}
+
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
@@ -1053,14 +1082,6 @@ video {
 .ring-white {
   --tw-ring-opacity: 1 !important;
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity, 1)) !important;
-}
-
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 150ms !important;
 }
 
 .transition-all {
@@ -1179,6 +1200,28 @@ body {
 
 .hover\:opacity-100:hover {
   opacity: 1 !important;
+}
+
+.hover\:shadow:hover {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+.focus\:border-\[\#3790ad\]:focus {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(55 144 173 / var(--tw-border-opacity, 1)) !important;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+.focus\:ring-\[\#3790ad\]:focus {
+  --tw-ring-opacity: 1 !important;
+  --tw-ring-color: rgb(55 144 173 / var(--tw-ring-opacity, 1)) !important;
 }
 
 @media (min-width: 640px) {
