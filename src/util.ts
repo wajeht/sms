@@ -5,7 +5,7 @@ import path from 'node:path';
 import { JSDOM } from 'jsdom';
 import { logger } from './logger';
 import axios, { AxiosError } from 'axios';
-import { appConfig, phoneConfig } from './config';
+import { appConfig, scrapeConfig } from './config';
 import nodeCron, { ScheduledTask } from 'node-cron';
 import { Carrier, CarrierData, CronJob } from './types';
 import { Application, Request, Response, NextFunction } from 'express';
@@ -240,23 +240,69 @@ export function extractCarrierDataFromSourceOne(html: string): CarrierData {
 		return data;
 	} catch (error) {
 		logger.error(
-			'[extractCarrierDataFromSourceOne] Error transforming html into carrier data data %o',
+			'[extractCarrierDataFromSourceOne] Error transforming html into carrier data %o',
 			error,
 		);
 		return {};
 	}
 }
 
-export async function combineCarrierDataFromSources(): Promise<CarrierData> {
+export function extractCarrierDataFromSourceThree(
+	data: {
+		carrier: string;
+		'email-to-sms': string;
+		'email-to-mms': string;
+	}[],
+): CarrierData {
+	try {
+		const carrierData: CarrierData = {};
+
+		for (const d of data) {
+			const carrierName = d.carrier;
+			const category = carrierName[0]?.toUpperCase() ?? '';
+			const emailsToAdd = [d['email-to-sms'], d['email-to-mms']];
+
+			if (!carrierData[category]) {
+				carrierData[category] = [];
+			}
+
+			let carrier = carrierData[category].find((c) => c.name === carrierName);
+			if (!carrier) {
+				carrier = { name: carrierName, emails: [] };
+				carrierData[category].push(carrier);
+			}
+
+			for (const email of emailsToAdd) {
+				if (email?.includes('@') && !carrier.emails.includes(email)) {
+					carrier.emails.push(email);
+				}
+			}
+		}
+
+		return carrierData;
+	} catch (error) {
+		logger.error(
+			'[extractCarrierDataFromSourceThree] Error transforming data into carrier data %o',
+			error,
+		);
+		return {};
+	}
+}
+
+async function combineCarrierDataFromSources(): Promise<CarrierData> {
 	const data: CarrierData = {};
 
 	try {
 		const one = extractCarrierDataFromSourceOne(
-			await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlOne),
+			await getCarrierWebsiteHTML(scrapeConfig.carrierWebsiteUrlOne),
 		);
 
 		const two = extractCarrierDataFromSourceTwo(
-			await getCarrierWebsiteHTML(phoneConfig.carrierWebsiteUrlTwo),
+			await getCarrierWebsiteHTML(scrapeConfig.carrierWebsiteUrlTwo),
+		);
+
+		const three = extractCarrierDataFromSourceThree(
+			await getCarrierWebsiteHTML(scrapeConfig.carrierWebsiteUrlThree),
 		);
 
 		// Merge data from the first source
@@ -286,6 +332,27 @@ export async function combineCarrierDataFromSources(): Promise<CarrierData> {
 				data[key] = [];
 			}
 			two[key]!.forEach((carrier) => {
+				const existingCarrier = data[key]!.find((c) => c.name === carrier.name);
+				if (existingCarrier) {
+					// Add new emails if not already present
+					carrier.emails.forEach((email) => {
+						if (!existingCarrier.emails.includes(email)) {
+							existingCarrier.emails.push(email);
+						}
+					});
+				} else {
+					// Add new carrier
+					data[key]!.push({ name: carrier.name, emails: [...carrier.emails] });
+				}
+			});
+		}
+
+		// Merge data from the second source
+		for (const key in three) {
+			if (!data[key]) {
+				data[key] = [];
+			}
+			three[key]!.forEach((carrier) => {
 				const existingCarrier = data[key]!.find((c) => c.name === carrier.name);
 				if (existingCarrier) {
 					// Add new emails if not already present

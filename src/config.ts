@@ -11,9 +11,10 @@ export const appConfig = {
 	adminEmail: process.env.APP_ADMIN_EMAIL || '',
 };
 
-export const phoneConfig = {
+export const scrapeConfig = {
 	carrierWebsiteUrlOne: process.env.CARRIER_WEBSITE_URL_ONE || '',
 	carrierWebsiteUrlTwo: process.env.CARRIER_WEBSITE_URL_TWO || '',
+	carrierWebsiteUrlThree: process.env.CARRIER_WEBSITE_URL_THREE || '',
 };
 
 export const sessionConfig = {
