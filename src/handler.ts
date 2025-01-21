@@ -16,6 +16,11 @@ export async function getHomepageHandler(req: Request, res: Response) {
 	});
 }
 
+// POST /phone
+export async function postPhonePageHandler(req: Request, res: Response) {
+	return res.redirect(`/phone/${req.body.number}`);
+}
+
 // GET /phone
 export async function getPhonePageHandler(req: Request, res: Response) {
 	return res.render('phone.html', { title: 'Phone' });
