@@ -13,6 +13,7 @@ import {
 	appLocalStateMiddleware,
 	sessionMiddleware,
 	helmetMiddleware,
+	rateLimitMiddleware,
 } from './middleware';
 
 const app = express();
@@ -28,6 +29,8 @@ app.use(compression());
 app.use(cors());
 
 app.use(helmetMiddleware());
+
+app.use(rateLimitMiddleware());
 
 app.use(express.json({ limit: '100kb' }));
 
