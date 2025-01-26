@@ -1,14 +1,11 @@
-import fs from 'node:fs';
 import fastq from 'fastq';
 import { db } from './db/db';
-import path from 'node:path';
 import { JSDOM } from 'jsdom';
 import { logger } from './logger';
 import axios, { AxiosError } from 'axios';
-import { appConfig, scrapeConfig } from './config';
+import { scrapeConfig } from './config';
 import nodeCron, { ScheduledTask } from 'node-cron';
 import { Carrier, CarrierData, CronJob } from './types';
-import { Application, Request, Response, NextFunction } from 'express';
 
 export class Cron {
 	private crons: ScheduledTask[] = [];
@@ -41,97 +38,6 @@ export class Cron {
 			logger.info('[Cron#stop] Stopped task: %o', cron);
 		});
 	}
-}
-
-export function reload({
-	app,
-	watch,
-	options = {},
-}: {
-	app: Application;
-	watch: { path: string; extensions?: string[] }[];
-	options?: { pollInterval?: number; quiet?: boolean };
-}): void {
-	if (appConfig.env !== 'development') return;
-
-	const pollInterval = options.pollInterval || 50;
-	const quiet = options.quiet || false;
-	let changeDetected = false;
-	const lastContents = new Map<string, string>();
-
-	watch.forEach(({ path: watchPath, extensions }) => {
-		const isDirectory = fs.statSync(watchPath).isDirectory();
-
-		if (isDirectory && !extensions) {
-			throw new Error(`Extensions must be provided for directory: ${watchPath}`);
-		}
-
-		fs.watch(
-			watchPath,
-			{ recursive: isDirectory },
-			(_: fs.WatchEventType, filename: string | null) => {
-				if (!filename) return;
-
-				const fullPath = isDirectory ? path.join(watchPath, filename) : watchPath;
-
-				// Only check extensions for directories
-				if (isDirectory && extensions && !extensions.some((ext) => filename.endsWith(ext))) {
-					return;
-				}
-
-				try {
-					const content = fs.readFileSync(fullPath, 'utf8');
-
-					if (content !== lastContents.get(fullPath)) {
-						lastContents.set(fullPath, content);
-
-						if (!quiet) logger.info('[reload] File changed: %s', filename);
-						changeDetected = true;
-					}
-				} catch {
-					if (!quiet) logger.debug('[reload] Error reading file: %s', filename);
-				}
-			},
-		);
-	});
-
-	app.get('/wait-for-reload', (req: Request, res: Response) => {
-		const timer = setInterval(() => {
-			if (changeDetected) {
-				changeDetected = false;
-				clearInterval(timer);
-				res.send();
-			}
-		}, pollInterval);
-
-		req.on('close', () => clearInterval(timer));
-	});
-
-	const clientScript = `
-	<script>
-		(async function poll() {
-			try {
-				await fetch('/wait-for-reload');
-				location.reload();
-			} catch {
-				location.reload();
-			}
-		})();
-	</script>\n\t`;
-
-	app.use((_req: Request, res: Response, next: NextFunction) => {
-		const originalSend = res.send.bind(res);
-
-		res.send = function (body: string): Response {
-			if (typeof body === 'string' && body.includes('</head>')) {
-				body = body.replace('</head>', clientScript + '</head>');
-			}
-
-			return originalSend(body);
-		};
-
-		next();
-	});
 }
 
 export async function getCarrierWebsiteHTML(url: string) {

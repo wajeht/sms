@@ -1,12 +1,3 @@
-import ejs from 'ejs';
-import cors from 'cors';
-import express from 'express';
-import { reload } from './util';
-import flash from 'connect-flash';
-import { router } from './router';
-import compression from 'compression';
-import { appConfig } from './config';
-import expressLayouts from 'express-ejs-layouts';
 import {
 	errorMiddleware,
 	notFoundMiddleware,
@@ -15,6 +6,15 @@ import {
 	helmetMiddleware,
 	rateLimitMiddleware,
 } from './middleware';
+import ejs from 'ejs';
+import cors from 'cors';
+import express from 'express';
+import flash from 'connect-flash';
+import { router } from './router';
+import compression from 'compression';
+import { appConfig } from './config';
+import expressLayouts from 'express-ejs-layouts';
+import { expressTemplatesReload as reload } from '@wajeht/express-templates-reload';
 
 const app = express();
 
@@ -52,10 +52,16 @@ app.use(expressLayouts);
 
 app.use(appLocalStateMiddleware);
 
-reload({
-	app,
-	watch: [{ path: './public/script.js' }, { path: './src/views', extensions: ['.html'] }],
-});
+if (appConfig.env === 'development') {
+	reload({
+		app,
+		watch: [
+			{ path: './public/script.js' },
+			{ path: './public/style.css' },
+			{ path: './src/views', extensions: ['.html'] },
+		],
+	});
+}
 
 app.use(router);
 
