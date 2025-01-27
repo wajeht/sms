@@ -19,6 +19,12 @@ declare global {
 	}
 }
 
+export type SendEmailParams = {
+	to: string;
+	subject: string;
+	html: string;
+};
+
 export type ApiKeyPayload = { userId: number; apiKeyVersion: number };
 
 export type Env = 'production' | 'development' | 'testing';

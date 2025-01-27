@@ -174,6 +174,6 @@ export function rateLimitMiddleware() {
 
 			return res.status(429).send('Too many requests from this IP, please try again later.');
 		},
-		skip: (req: any, res: any) => appConfig.env !== 'production',
+		skip: (_req: Request, _res: Response) => appConfig.env !== 'production',
 	});
 }
