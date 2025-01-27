@@ -4,12 +4,12 @@ import { Request, Response } from 'express';
 import { carrierData, updateCarrierQueue } from './util';
 
 // GET /healthz
-export function getHealthzHandler(req: Request, res: Response) {
+export function getHealthzHandler(_req: Request, res: Response) {
 	res.status(200).send('ok');
 }
 
 // GET /
-export async function getHomepageHandler(req: Request, res: Response) {
+export async function getHomepageHandler(_req: Request, res: Response) {
 	return res.render('home.html', {
 		carriers: await carrierData(),
 		lastUpdatedDate: new Date(new Date().setHours(0, 0, 0, 0)).toLocaleString(),
@@ -17,8 +17,13 @@ export async function getHomepageHandler(req: Request, res: Response) {
 }
 
 // GET /phone
-export async function getPhonePageHandler(req: Request, res: Response) {
+export async function getPhonePageHandler(_req: Request, res: Response) {
 	return res.render('phone.html', { title: 'Phone' });
+}
+
+// GET /download-csv
+export async function getDownloadAsCSVPageHandler(_req: Request, res: Response) {
+	return res.render('download-csv.html', { title: 'Download as CSV' });
 }
 
 // GET /update
@@ -40,22 +45,22 @@ export async function getUpdateHandler(req: Request, res: Response) {
 }
 
 // GET /privacy-policy
-export function getPrivacyPolicyPageHandler(req: Request, res: Response) {
+export function getPrivacyPolicyPageHandler(_req: Request, res: Response) {
 	return res.render('privacy-policy.html', { title: 'Privacy Policy' });
 }
 
 // GET /terms-of-service
-export function getTermsOfServicePageHandler(req: Request, res: Response) {
+export function getTermsOfServicePageHandler(_req: Request, res: Response) {
 	return res.render('terms-of-service.html', { title: 'Terms of Service' });
 }
 
 // GET /contact
-export function getAPIPageHandler(req: Request, res: Response) {
+export function getAPIPageHandler(_req: Request, res: Response) {
 	return res.render('api.html', { title: 'API' });
 }
 
 // GET /api/categories
-export async function getAPICategoriesHandler(req: Request, res: Response) {
+export async function getAPICategoriesHandler(_req: Request, res: Response) {
 	const result = await db
 		.select(
 			'categories.id as category_id',
@@ -106,7 +111,7 @@ export async function getAPICategoryNameHandler(req: Request, res: Response) {
 }
 
 // GET /api/carriers
-export async function getAPICarriersHandler(req: Request, res: Response) {
+export async function getAPICarriersHandler(_req: Request, res: Response) {
 	const result = await db
 		.select(
 			'carriers.id',
@@ -159,7 +164,7 @@ export async function getAPICarrierIDHandler(req: Request, res: Response) {
 }
 
 // GET /api/emails
-export async function getAPIEmailsHandler(req: Request, res: Response) {
+export async function getAPIEmailsHandler(_req: Request, res: Response) {
 	res.json({
 		message: 'emails retrieved successfully',
 		data: await db.select('id', 'email').from('carrier_emails'),
