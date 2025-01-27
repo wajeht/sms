@@ -24,7 +24,7 @@ export const sessionConfig = {
 
 export const emailConfig = {
 	host: process.env.EMAIL_HOST || '',
-	port: parseInt(process.env.EMAIL_PORT || '0', 10),
+	port: parseInt(process.env.EMAIL_PORT || '1025', 10),
 	alias: process.env.EMAIL_ALIAS || '',
 	auth: {
 		user: process.env.EMAIL_AUTH_EMAIL || '',
