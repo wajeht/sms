@@ -80,6 +80,7 @@
 		"@types/express-session": "^1.18.1",
 		"@types/jsdom": "^21.1.7",
 		"@types/node-cron": "^3.0.11",
+		"@types/nodemailer": "^6.4.17",
 		"@typescript-eslint/eslint-plugin": "^7.16.1",
 		"@typescript-eslint/parser": "^7.18.0",
 		"@wajeht/express-templates-reload": "^1.0.3",

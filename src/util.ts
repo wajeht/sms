@@ -2,10 +2,45 @@ import fastq from 'fastq';
 import { db } from './db/db';
 import { JSDOM } from 'jsdom';
 import { logger } from './logger';
+import nodemailer from 'nodemailer';
 import axios, { AxiosError } from 'axios';
-import { scrapeConfig } from './config';
 import nodeCron, { ScheduledTask } from 'node-cron';
-import { Carrier, CarrierData, CronJob } from './types';
+import { emailConfig, scrapeConfig } from './config';
+import { Carrier, CarrierData, CronJob, SendEmailParams } from './types';
+
+export const updateCarrierQueue = fastq.promise(updateCarrier, 10);
+export const sendEmailQueue = fastq.promise(sendEmail, 10);
+
+export async function sendEmail({ to, subject, html }: SendEmailParams): Promise<void> {
+	const transporter = nodemailer.createTransport({
+		host: emailConfig.host,
+		port: emailConfig.port,
+		auth: {
+			user: emailConfig.auth.user,
+			pass: emailConfig.auth.pass,
+		},
+	});
+
+	try {
+		const info = await transporter.sendMail({
+			from: emailConfig.alias,
+			to,
+			subject,
+			html,
+		});
+
+		logger.info(`[sendEmail]: Email sent successfully to: ${to}`, { messageId: info.messageId });
+	} catch (error) {
+		logger.error('[sendEmail]: Error sending email', {
+			to,
+			subject,
+			error: error instanceof Error ? error.message : 'Unknown error',
+			stack: error instanceof Error ? error.stack : undefined,
+		});
+
+		// throw new Error(`Failed to send email: ${error instanceof Error ? error.message : 'Unknown error'}`);
+	}
+}
 
 export class Cron {
 	private crons: ScheduledTask[] = [];
@@ -392,5 +427,3 @@ export async function carrierData() {
 		return {};
 	}
 }
-
-export const updateCarrierQueue = fastq.promise(updateCarrier, 10);
