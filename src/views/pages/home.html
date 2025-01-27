@@ -82,9 +82,12 @@
     <p class="mb-5">You probably already know the phone number part, but if you’re missing the domain name, don’t worry—we’ve got a list of common ones below.</p>
     <p class="mb-5 p-3 w-fit dark:bg-neutral-800 bg-neutral-100 rounded dark:shadow-md">Please note that the data we provide is sourced from multiple platforms, and while we strive for accuracy, there might be some duplication or slight inaccuracies in the information.</p>
     <p class="mb-5">Carriers are listed in alphabetical order, so just click on a letter to jump to the one you need.</p>
-    <% if (carriers.keys.length) { %>
-      <p class="italic break-all text-sm">Last updated on <%= lastUpdatedDate %></p>
-    <% } %>
+    <div class="flex items-center  justify-between gap-5">
+      <% if (carriers.keys.length) { %>
+        <p class="italic break-all text-sm">Last updated on <%= lastUpdatedDate %></p>
+      <% } %>
+      <button class="break-all text-sm hover:underline">Downlaod as CSV</button>
+    </div>
   </div>
 </div>
 
