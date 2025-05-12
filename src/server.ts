@@ -8,6 +8,8 @@ import { Cron, updateCarrier } from './util';
 
 const server: Server = app.listen(appConfig.port);
 
+process.title = 'SMS';
+
 server.on('listening', async () => {
 	const addr: string | AddressInfo | null = server.address();
 	const bind: string =
